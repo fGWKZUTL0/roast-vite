@@ -1,3 +1,3 @@
-FROM node:17.2
+FROM node:16.10.0
 RUN mkdir /myapp
 WORKDIR /myapp
