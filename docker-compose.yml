@@ -23,9 +23,9 @@ services:
     tty: true
   front:
     build: ./front
-    command: yarn start
+    command: sh -c "yarn install && yarn run dev"
     ports:
-      - "3000:3000"
+      - "5173:5173"
     volumes:
       - ./front:/myapp
     depends_on:
