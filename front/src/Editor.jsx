@@ -10,7 +10,7 @@ const Editor = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await window.fetch('tweets/index', {method: "get"})
+        const response = await window.fetch('http://localhost:3001/tweets/index', {method: "get"})
         if (!response.ok) throw Error(response.statusText)
         const data = await response.json()
         setTweets(data)

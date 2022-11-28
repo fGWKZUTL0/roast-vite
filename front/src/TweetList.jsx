@@ -6,7 +6,7 @@ const TweetList = ({ tweets }) => {
 
     return tweetArray.map((tweet) => (
       <li key={tweet.id}>
-        {tweet.context}
+        id={tweet.id},text={tweet.context}
       </li>
     ));
   };
