@@ -1,6 +1,6 @@
 import React from 'react';
-import Editor from './Editor';
+import Tweet from './Tweet';
 
-const App = () => <Editor />;
+const App = () => <Tweet />;
 
 export default App;
