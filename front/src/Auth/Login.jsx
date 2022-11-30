@@ -20,7 +20,7 @@ const Login = () => {
           </label>
         </div>
         <div>
-          <input type="submit" value="Submit" />
+          <button type="submit">Go</button>
         </div>
 
       </form>

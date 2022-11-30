@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+            # Include default devise modules.
+            devise :database_authenticatable, :registerable,
+                    :recoverable, :rememberable, :trackable, :validatable,
+                    :confirmable, :omniauthable
+            include DeviseTokenAuth::Concerns::User
   #バリデーション
   #before_save { self.email = email.downcase }
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

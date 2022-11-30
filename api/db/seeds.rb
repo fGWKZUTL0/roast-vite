@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 5.times do |i|
-  Tweet.create(context: "テスト #{i}", user_id: 1)
+  Tweet.create(tweet: "テスト #{i}", user_id: 1)
 end
 
-User.create(name: "テスト", email: "text@gmail.com", password_digest: "*********", username: "test_user", bio:"test", icon: "***/***.jpeg")
+User.create(nickname: "テスト", email: "text@gmail.com", password_digest: "*********", username: "test_user", bio:"test", icon: "***/***.jpeg")
