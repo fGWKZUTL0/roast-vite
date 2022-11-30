@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
-import TweetList from './TweetList'
+import TweetList from './Tweet/TweetList'
 
 const Editor = () => {
   const [tweets, setTweets] = useState([])

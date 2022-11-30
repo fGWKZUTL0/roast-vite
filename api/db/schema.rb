@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_11_23_144840) do
   create_table "tweets", charset: "utf8mb3", force: :cascade do |t|
-    t.text "context"
+    t.text "tweet"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
-    t.string "name"
+    t.string "nickname"
     t.string "email"
     t.string "password_digest"
     t.string "username"
