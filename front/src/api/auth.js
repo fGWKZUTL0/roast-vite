@@ -29,7 +29,7 @@ export const getCurrentUser = () => {
     !Cookies.get("_client") ||
     !Cookies.get("_uid")
   )
-    return;
+    return false;
 
   return client.get("/auth/sessions", {
     headers: {

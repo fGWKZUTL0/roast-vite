@@ -11,6 +11,6 @@ export const PrivateRoute = memo((props) => {
       </div>
     </>
   ) : (
-    <Navigate to="/" />
+    <Navigate replace to="/Login" />
   )
 })
