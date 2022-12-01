@@ -24,18 +24,20 @@ export const signOut = () => {
 
 // ログインユーザーの取得
 export const getCurrentUser = () => {
-  if (
-    !Cookies.get("_access_token") ||
-    !Cookies.get("_client") ||
-    !Cookies.get("_uid")
-  )
-    return false;
-
-  return client.get("/auth/sessions", {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    },
+  fetch('http://localhost:3001//auth/sessions', {
+    method: 'GET'
   })
+  .then(response => {
+    if (!response.ok) {
+      console.error('サーバーエラー')
+    }
+    // ここに成功時の処理を記述
+    const data = response.json()
+    setTweets(data)
+  })
+  .catch(error => {
+    console.error('通信に失敗しました', error)
+  })
+
+  return 
 }
