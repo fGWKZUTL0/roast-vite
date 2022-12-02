@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
 import Editor from './Editor'
 import Home from './Home'
-import CreateUser from './User/CreateUser'
-import Login from './User/Login'
+import CreateUser from './Form/CreateUser.jsx'
+import Login from './Form/Login.jsx'
 import { getCurrentUser } from './api/auth'
 
 import { PrivateRoute } from './router/PrivateRouter'

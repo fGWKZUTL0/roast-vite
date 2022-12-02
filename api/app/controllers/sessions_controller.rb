@@ -3,7 +3,9 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
 
   def index
-    render json: {message:"bad"}
+
+    render json: {message:"success"}
+
   end
 
   def new
