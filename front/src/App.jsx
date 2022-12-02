@@ -17,15 +17,13 @@ function App() {
 
   const handleGetCurrentUser = async () => {
     try {
-      const res = await getCurrentUser()
+      const inLogin = await getCurrentUser()
       
-      if (res?.data.isLogin === true) {
-        setIsSignedIn(true)
-        setCurrentUser(res?.data.data)
-        console.log(res?.data.data)
+      if (inLogin === true) {
+        console.log("success")
       } else {
         console.log("no current user")
-        return <Navigate replace to="Login"/>
+        return <Login />
       }
     } catch (e) {
       console.log(e)
@@ -66,7 +64,7 @@ function App() {
               </li>
             </ul>
             <Routes>
-              <Route path="/Home" element={ currentUser? <Home /> : <Navigate replace to="/Login" />}/>
+              <Route path="/Home" element={ getCurrentUser ? <Home /> : <Navigate replace to="/Login" />}/>
 
               <Route path={`/Editor`} element={<Editor />} />
               <Route path={`/CreateUser`} element={<CreateUser />} />
