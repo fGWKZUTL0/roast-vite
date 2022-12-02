@@ -10,4 +10,4 @@
   Tweet.create(tweet: "テスト #{i}", user_id: 1)
 end
 
-User.create(nickname: "テスト", email: "text@gmail.com", password_digest: "*********", username: "test_user", bio:"test", icon: "***/***.jpeg")
+User.create(nickname: "テスト", email: "text@gmail.com", password_digest: "test", username: "test_user", bio:"test", icon: "***/***.jpeg")
