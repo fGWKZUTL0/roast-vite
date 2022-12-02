@@ -15,6 +15,7 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState()
 
+  /*
   const handleGetCurrentUser = async () => {
     try {
       const inLogin = await getCurrentUser()
@@ -34,6 +35,7 @@ function App() {
   useEffect(() => {
     handleGetCurrentUser()
   }, [setCurrentUser])
+  */
 
   return(
     <div className="App contents">
@@ -64,7 +66,7 @@ function App() {
               </li>
             </ul>
             <Routes>
-              <Route path="/Home" element={ getCurrentUser ? <Home /> : <Navigate replace to="/Login" />}/>
+              <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
 
               <Route path={`/Editor`} element={<Editor />} />
               <Route path={`/CreateUser`} element={<CreateUser />} />

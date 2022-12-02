@@ -24,7 +24,8 @@ export const signOut = () => {
 
 // ログインユーザーの取得
 export const getCurrentUser = () => {
-  fetch('http://localhost:3001//auth/sessions', {
+  let result = ""
+  fetch('http://localhost:3001//sessions/index', {
     method: 'GET'
   })
   .then(response => {
@@ -33,11 +34,17 @@ export const getCurrentUser = () => {
     }
     // ここに成功時の処理を記述
     const data = response.json()
-    setTweets(data)
+    result = data.message
   })
   .catch(error => {
     console.error('通信に失敗しました', error)
   })
-
-  return 
+  console.log(result)
+  if(result === "success"){
+    console.log("success")
+    return true
+  }else{
+    console.log("failure")
+    return false
+  }
 }
