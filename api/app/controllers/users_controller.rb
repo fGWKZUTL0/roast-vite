@@ -7,13 +7,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    user = User.new(nickname: params[:nickname], email: params[:email], password_digest: params[:password_digest],)
 
     user.username = p SecureRandom.hex(5)
 
     if user.save
       log_in(user)
       render json: { status: "success"}
+    else
+      render json: { status: "fail"}
     end
   end
 
@@ -27,6 +29,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :icon)
+      params.require(:user).permit(:nickname, :email, :password, :password_confirmation, :bio, :icon)
     end
 end
