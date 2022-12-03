@@ -2,9 +2,24 @@ import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 
 const CreateUser = () => {
+  const CreateUser = document.getElementById("CreateUser")
+
   const [form, setForm] = useState({name:'', email:'', password:'', password_digest:''});
   const handleSend = (e) => {
-    console.log(form)
+    const formData = new FormData(CreateUser)
+    fetch("http://localhost:3001//users/create", {
+      method: 'POST',
+      body: formData
+    }).then((response) =>{
+      if (!response.ok) {
+        console.log("error!")
+      }
+      const data = response.json()
+      data.then(function(datavalue){
+        //console.log(datavalue.message)
+        //apiのmessageを参照
+      })
+    })
   }
   const handleChange = (e) => {
     setForm((prevState) => {
@@ -17,7 +32,7 @@ const CreateUser = () => {
   return (
     <>
       <Header />
-      <form action="http://localhost:3001//users/create" method="post" name="CreateUser" onSubmit={handleSend}>
+      <form id="CreateUser" name="CreateUser" >
         <div>
           <label>
             Name:
@@ -43,7 +58,7 @@ const CreateUser = () => {
           </label>
         </div>
         <div>
-          <input type="submit" value="Submit"/>
+          <input type="button" value="登録" onClick={handleSend}/>
         </div>
 
       </form>

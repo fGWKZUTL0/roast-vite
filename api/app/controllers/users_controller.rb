@@ -13,9 +13,9 @@ class UsersController < ApplicationController
 
     if user.save
       log_in(user)
-      render json: { status: "success"}
+      render json: { message: "success"}
     else
-      render json: { status: "fail"}
+      render json: { message: "fail"}
     end
   end
 
