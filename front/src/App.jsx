@@ -5,6 +5,7 @@ import Home from './Home'
 import CreateUser from './Form/CreateUser.jsx'
 import Login from './Form/Login.jsx'
 import { getCurrentUser } from './api/auth'
+import Header from './Header'
 
 import { PrivateRoute } from './router/PrivateRouter'
 
@@ -39,18 +40,20 @@ function App() {
 
   return(
     <div className="App contents">
-      <div>
-        <AuthContext.Provider
-          value={{
-            loading,
-            setLoading,
-            isSignedIn,
-            setIsSignedIn,
-            currentUser,
-            setCurrentUser,
-          }}
-        >
-          <BrowserRouter>
+      <AuthContext.Provider
+        value={{
+          loading,
+          setLoading,
+          isSignedIn,
+          setIsSignedIn,
+          currentUser,
+          setCurrentUser,
+        }}
+      >
+        <Header />
+        <BrowserRouter>
+        <div className="flex flex-wrap">
+          <div className="w-1/3">
             <ul>
               <li>
                 <Link to="/Home">Home</Link>
@@ -65,6 +68,8 @@ function App() {
                 <Link to="/Login">Login</Link>
               </li>
             </ul>
+          </div>
+          <div className="w-1/3">
             <Routes>
               <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
 
@@ -73,9 +78,10 @@ function App() {
               <Route path={`/Login`} element={<Login />} />
               <Route path="*" element={<p>There's nothing here: 404!</p>} />
             </Routes>
-          </BrowserRouter>
-        </AuthContext.Provider>
-      </div>
+          </div>
+        </div>
+        </BrowserRouter>
+      </AuthContext.Provider>
     </div>
   )  
 }
