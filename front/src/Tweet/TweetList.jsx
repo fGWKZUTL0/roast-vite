@@ -12,10 +12,11 @@ const TweetList = ({ tweets }) => {
   };
 
   return (
-    <section>
-      <h2>Tweet List</h2>
-      <ul>{renderTweets(tweets)}</ul>
-    </section>
+    <div className="TweetList">
+      <section>
+        <ul>{renderTweets(tweets)}</ul>
+      </section>
+    </div>
   );
 };
 

@@ -31,7 +31,6 @@ const CreateUser = () => {
   }
   return (
     <>
-      <Header />
       <form id="CreateUser" name="CreateUser" >
         <div>
           <label>

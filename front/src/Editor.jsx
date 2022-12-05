@@ -27,7 +27,6 @@ const Editor = () => {
 
   return (
     <>
-      <Header />
       {isError && <p>Something went wrong. Check the console.</p>}
 
       {isLoading ? <p>Loading...</p> : <TweetList tweets={tweets} />}

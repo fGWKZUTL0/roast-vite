@@ -50,36 +50,39 @@ function App() {
           setCurrentUser,
         }}
       >
-        <Header />
         <BrowserRouter>
-        <div className="flex flex-wrap">
-          <div className="w-1/3">
-            <ul>
-              <li>
-                <Link to="/Home">Home</Link>
-              </li>
-              <li>
-                <Link to="/Editor">Editor</Link>
-              </li>
-              <li>
-                <Link to="/CreateUser">CreateUser</Link>
-              </li>
-              <li>
-                <Link to="/Login">Login</Link>
-              </li>
-            </ul>
+          <div className="flex flex-wrap">
+            <div className="w-1/4">
+              <ul>
+                <li>
+                  <Link to="/Home">Home</Link>
+                </li>
+                <li>
+                  <Link to="/Editor">Editor</Link>
+                </li>
+                <li>
+                  <Link to="/CreateUser">CreateUser</Link>
+                </li>
+                <li>
+                  <Link to="/Login">Login</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="w-1/2">
+              <Header />
+            </div>
           </div>
-          <div className="w-1/3">
-            <Routes>
-              <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
+          <div className="w-1/4">
 
-              <Route path={`/Editor`} element={<Editor />} />
-              <Route path={`/CreateUser`} element={<CreateUser />} />
-              <Route path={`/Login`} element={<Login />} />
-              <Route path="*" element={<p>There's nothing here: 404!</p>} />
-            </Routes>
           </div>
-        </div>
+          <Routes>
+            <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
+
+            <Route path={`/Editor`} element={<Editor />} />
+            <Route path={`/CreateUser`} element={<CreateUser />} />
+            <Route path={`/Login`} element={<Login />} />
+            <Route path="*" element={<p>There's nothing here: 404!</p>} />
+          </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
     </div>

@@ -5,7 +5,6 @@ const Login = () => {
 
   return (
     <>
-      <Header />
       <form action="/" method="post">
         <div>
           <label>
