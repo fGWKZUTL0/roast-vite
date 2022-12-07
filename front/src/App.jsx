@@ -2,10 +2,11 @@ import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
 import Editor from './Editor'
 import Home from './Home'
-import CreateUser from './Form/CreateUser.jsx'
-import Login from './Form/Login.jsx'
+import CreateUser from './User/CreateUser.jsx'
+import Login from './User/Login.jsx'
+import Logout from './User/Logout.jsx'
 import { getCurrentUser } from './api/auth'
-import Header from './Header'
+import Header from './Header.jsx'
 
 import { PrivateRoute } from './router/PrivateRouter'
 
@@ -66,23 +67,27 @@ function App() {
                 <li>
                   <Link to="/Login">Login</Link>
                 </li>
+                <li>
+                  <Link to="/Logout">Logout</Link>
+                </li>
               </ul>
             </div>
             <div className="w-1/2">
               <Header />
+              <Routes>
+                <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
+
+                <Route path={`/Editor`} element={<Editor />} />
+                <Route path={`/CreateUser`} element={<CreateUser />} />
+                <Route path={`/Login`} element={<Login />} />
+                <Route path={`/Logout`} element={<Logout />} />
+                <Route path="*" element={<p>There's nothing here: 404!</p>} />
+              </Routes>
             </div>
           </div>
           <div className="w-1/4">
 
           </div>
-          <Routes>
-            <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
-
-            <Route path={`/Editor`} element={<Editor />} />
-            <Route path={`/CreateUser`} element={<CreateUser />} />
-            <Route path={`/Login`} element={<Login />} />
-            <Route path="*" element={<p>There's nothing here: 404!</p>} />
-          </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
     </div>

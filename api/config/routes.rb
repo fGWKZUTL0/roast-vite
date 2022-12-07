@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post "users/create" => "users#create"
 
   get "sessions/index" => "sessions#index"
+  get "sessions/destroy" => "sessions#destroy"
 end

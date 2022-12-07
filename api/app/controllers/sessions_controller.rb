@@ -27,7 +27,11 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to login_path
+    if logged_in?
+      render json: {message:"fail"}
+    else
+      render json: {message:"success"}
+    end
   end
 
 end

@@ -16,7 +16,7 @@ const CreateUser = () => {
       }
       const data = response.json()
       data.then(function(datavalue){
-        //console.log(datavalue.message)
+        console.log(datavalue.message)
         //apiのmessageを参照
       })
     })
