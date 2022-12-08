@@ -1,31 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import { Navigate } from "react-router-dom"
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../App";
 
-const Logout = (props) => {
-  fetch('http://localhost:3001/sessions/destroy', {
-    method: 'GET'
-  })
-  .then(response => {
-    if (!response.ok) {
-      console.error('サーバーエラー')
-    }
-    // ここに成功時の処理を記述
-    const data = response.json()
-    data.then(function(datavalue){
-      console.log(datavalue.message)
-      props.setIsSignedIn(false)
-      //apiのmessageを参照
+const Logout = () => {
+  const navigate = useNavigate()
+  const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
+
+	useEffect(() => {
+  	const logoutPath = 'http://localhost:3001/sessions/destroy'
+    // ログアウト API へ POST
+    axios.get(logoutPath)
+    .then((response)=>{
+      // Cookies の JWTTOKEN のバリューを削除
+      document.cookie = "JWTTOKEN=; SameSite=None; Secure"
+      // SessionStorage の認可情報を削除
+      sessionStorage.removeItem('AUTHORITY')
+      setIsSignedIn(false)
+      // ログインページへリダイレクト
+      navigate('/Login')
     })
-  })
-  .catch(error => {
-    console.error('通信に失敗しました', error)
-  })
-
-  return (
-    <>
-      <Navigate replace to="/Login" />
-    </>
-  )
+  }, [])
 }
 
 export default Logout
