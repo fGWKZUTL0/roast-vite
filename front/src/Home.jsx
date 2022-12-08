@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
-import TweetList from './Tweet/TweetList'
+import TweetList from './components/TimeLine'
 
 const Home = ({ children }) => {
   const [tweets, setTweets] = useState([])

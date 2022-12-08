@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import TweetList from './Tweet/TweetList'
+import TweetList from './Tweet/TimeLine'
 
 const Editor = () => {
   const [tweets, setTweets] = useState([])

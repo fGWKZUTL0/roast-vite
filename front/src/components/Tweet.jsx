@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import TweetList from './TweetList'
+import TimeLine from './TimeLine'
 
 const Tweet = () => {
   const [tweets, setTweets] = useState([])
@@ -27,7 +27,7 @@ const Tweet = () => {
     <>
       {isError && <p>Something went wrong. Check the console.</p>}
 
-      {isLoading ? <p>Loading...</p> : <TweetList tweets={tweets} />}
+      {isLoading ? <p>Loading...</p> : <TimeLine tweets={tweets} />}
     </>
   )
 }

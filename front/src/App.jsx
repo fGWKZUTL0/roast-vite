@@ -1,14 +1,15 @@
 import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
 import axios from 'axios'
-import Tweet from './Tweet/Tweet'
 import Home from './Home'
-import CreateUser from './User/CreateUser.jsx'
-import Login from './User/Login.jsx'
-import Logout from './User/Logout.jsx'
+import CreateUser from './Page/CreateUser.jsx'
+import Login from './Page/Login.jsx'
+import Logout from './Page/Logout.jsx'
 import Header from './Header.jsx'
+import NavBar from './components/NavBar.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 export const AuthContext = createContext()
 
 function App() {
@@ -16,15 +17,19 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState()
 
+  const myAuthority = sessionStorage.getItem('AUTHORITY')
   useEffect(() => {
-    console.log("useEffect")
+    if(myAuthority !== null){
+      setIsSignedIn(true)
+    }else{
+      setIsSignedIn(false)
+    }
   }, [isSignedIn])
 
   // 認証確認メソッド
   // → 認証されていない場合、ログインページにリダイレクト
   const RequireAuth = ( props ) => {
-    const myAuthority = sessionStorage.getItem('AUTHORITY')
-
+    
     // 権限が「GENERAL」の場合、渡されたコンポーネントをレンダリング
     if(myAuthority !== null){
       return props.component;
@@ -35,7 +40,6 @@ function App() {
 
   // 非認証確認メソッド
   const RequireNoAuth = ( props ) => {
-    const myAuthority = sessionStorage.getItem('AUTHORITY');
 
     // 権限がない場合、渡されたこのポーネントをレンダリング
     // ※ ログインページとユーザ新規登録ページに適用
@@ -61,28 +65,13 @@ function App() {
         <BrowserRouter>
           <div className="row">
             <div className="col-3">
-              <ul className="nav flex-column m-4 w-50">
-                <li className="nav-item">
-                  <Link className="nav-link btn-link rounded-pill" to="/Home">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link btn-link rounded-pill" to="/Tweet">Tweet</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link btn-link rounded-pill" to="/CreateUser">CreateUser</Link>
-                </li>
-                <li className="nav-item">
-                  {isSignedIn ? <Link className="nav-link btn-link rounded-pill" to="/Logout">Logout</Link> :
-                   <Link className="nav-link btn-link rounded-pill" to="/Login">Login</Link>}
-                </li>
-              </ul>
+              <NavBar />
             </div>
             <div className="col-6">
               <Header />
               <Routes>
                 <Route path="/Home" element={<RequireAuth component={<Home />} />} />
                 <Route path='/Login' element={<RequireNoAuth component={<Login />} />} />
-                <Route path={'/Tweet'} element={<Tweet />} />
                 <Route path={'/CreateUser'} element={<CreateUser />} />
                 <Route path={'/Logout'} element={<Logout setIsSignedIn={setIsSignedIn} />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
