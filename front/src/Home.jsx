@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import TweetList from './Tweet/TweetList'
 
-const Home = () => {
+const Home = ({ children }) => {
   const [tweets, setTweets] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)

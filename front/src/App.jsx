@@ -1,44 +1,40 @@
 import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
-import Editor from './Editor'
+import axios from 'axios'
+import Tweet from './Tweet/Tweet'
 import Home from './Home'
 import CreateUser from './User/CreateUser.jsx'
 import Login from './User/Login.jsx'
 import Logout from './User/Logout.jsx'
-import { getCurrentUser } from './api/auth'
 import Header from './Header.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Nav from 'react-bootstrap/Nav';
 
 export const AuthContext = createContext()
 
 function App() {
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState(false)
 
-  /*
-  const handleGetCurrentUser = async () => {
-    try {
-      const inLogin = await getCurrentUser()
-      
-      if (inLogin === true) {
-        console.log("success")
-      } else {
-        console.log("no current user")
-        return <Login />
-      }
-    } catch (e) {
-      console.log(e)
-    }
-    setLoading(false)
-  }
-
+  // ログインユーザーの取得
   useEffect(() => {
-    handleGetCurrentUser()
-  }, [setCurrentUser])
-  */
+    const fetchData = async () => {
+      try {
+        axios.get('http://localhost:3001//sessions/index')
+        .then(res => {
+          console.log(res.data.message)
+          if(res.data.id){
+            setIsSignedIn(true)
+          }
+        })
+      } catch (error) {
+        console.log("error!")
+        setIsSignedIn(false)
+      }
+    }
+    fetchData()
+  })
 
   return(
     <div className="App contents">
@@ -60,7 +56,7 @@ function App() {
                   <Link className="nav-link btn-link rounded-pill" to="/Home">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link btn-link rounded-pill" to="/Editor">Editor</Link>
+                  <Link className="nav-link btn-link rounded-pill" to="/Tweet">Tweet</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link btn-link rounded-pill" to="/CreateUser">CreateUser</Link>
@@ -76,12 +72,12 @@ function App() {
             <div className="col-6">
               <Header />
               <Routes>
-                <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
+                <Route path="/Home" element={ isSignedIn === true ? <Home /> : <Navigate replace to="/Login" />}/>
 
-                <Route path={`/Editor`} element={<Editor />} />
+                <Route path={`/Tweet`} element={<Tweet />} />
                 <Route path={`/CreateUser`} element={<CreateUser />} />
                 <Route path={`/Login`} element={<Login />} />
-                <Route path={`/Logout`} element={<Logout />} />
+                <Route path={`/Logout`} element={<Logout setIsSignedIn={setIsSignedIn} />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>

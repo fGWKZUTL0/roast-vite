@@ -1,29 +1,13 @@
-import client from "./client"
-import Cookies from "js-cookie"
+import React, { useContext } from "react"
 
-// サインアップ
-export const signUp = (params) => {
-  return client.post("/auth", params)
-}
+const AuthContext = React.createContext({
+  isSignedIn: false
+})
 
-// サインイン
-export const signIn = (params) => {
-  return client.post("/auth/sign_in", params)
-}
-
-// サインアウト
-export const signOut = () => {
-  return client.delete("/auth/sign_out", {
-    headers: {
-      "access-token": Cookies.get("_access_token"),
-      client: Cookies.get("_client"),
-      uid: Cookies.get("_uid"),
-    },
-  })
-}
-
+export default AuthContext
+/*
 // ログインユーザーの取得
-export const getCurrentUser = () => {
+useEffect(() => {
   let result = ""
   fetch('http://localhost:3001//sessions/index', {
     method: 'GET'
@@ -35,6 +19,7 @@ export const getCurrentUser = () => {
     // ここに成功時の処理を記述
     const data = response.json()
     result = data.message
+    setIsSignedIn(true)
   })
   .catch(error => {
     console.error('通信に失敗しました', error)
@@ -47,4 +32,5 @@ export const getCurrentUser = () => {
     console.log("failure")
     return false
   }
-}
+})
+*/

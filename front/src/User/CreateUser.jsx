@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap'
+import axios from 'axios'
 
 const CreateUser = () => {
   const CreateUser = document.getElementById("CreateUser")
@@ -8,19 +8,14 @@ const CreateUser = () => {
   const [form, setForm] = useState({name:'', email:'', password:'', password_digest:''});
   const handleSend = (e) => {
     const formData = new FormData(CreateUser)
-    fetch("http://localhost:3001//users/create", {
-      method: 'POST',
-      body: formData
-    }).then((response) =>{
-      if (!response.ok) {
-        console.log("error!")
-      }
-      const data = response.json()
-      data.then(function(datavalue){
-        console.log(datavalue.message)
-        //apiのmessageを参照
+    try {
+      axios.post('http://localhost:3001//users/create', formData)
+      .then(res => {
+        console.log(res.data.message)
       })
-    })
+    } catch (error) {
+      console.log("error!")
+    }
   }
   const handleChange = (e) => {
     setForm((prevState) => {

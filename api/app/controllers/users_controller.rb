@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(nickname: params[:nickname], email: params[:email], password: params[:password], password_digest: params[:password_digest])
+    user = User.new(nickname: params[:nickname], email: params[:email], password: params[:password])
 
     user.username = p SecureRandom.hex(5)
 

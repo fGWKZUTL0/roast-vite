@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navigate } from "react-router-dom"
 
-const Logout = () => {
+const Logout = (props) => {
   fetch('http://localhost:3001/sessions/destroy', {
     method: 'GET'
   })
@@ -13,6 +13,7 @@ const Logout = () => {
     const data = response.json()
     data.then(function(datavalue){
       console.log(datavalue.message)
+      props.setIsSignedIn(false)
       //apiのmessageを参照
     })
   })
@@ -24,7 +25,7 @@ const Logout = () => {
     <>
       <Navigate replace to="/Login" />
     </>
-  );
+  )
 }
 
 export default Logout

@@ -1,11 +1,13 @@
 class SessionsController < ApplicationController
 
-  before_action :require_login, only: [:destroy]
+  #before_action :require_login, only: [:destroy]
 
   def index
-
-    render json: {message:"success"}
-
+    if logged_in?
+      render json: {message:"success", currentUser: current_user}
+    else
+      render json:{message:"fail"}
+    end
   end
 
   def new
@@ -18,10 +20,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email].downcase)
     if user && user.authenticate(params[:password])
       log_in(user)
-      redirect_to "/profile/#{user.username}"
+      render json:{message:"success"}
     else
-      flash.now[:danger] = 'メールアドレスかパスワードが間違っています。'
-      render 'new'
+      render json:{message:"fail", errorMessage:"you failed to login"}
     end
   end
 

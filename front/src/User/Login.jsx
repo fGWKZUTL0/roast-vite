@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import axios from "axios"
 import { Button, Form } from 'react-bootstrap';
 
 const Login = () => {
-  const CreateUser = document.getElementById("LoginForm")
+  const LoginForm = document.getElementById("LoginForm")
 
   const [form, setForm] = useState({name:'', email:'', password:'', password_digest:''});
   const handleSend = (e) => {
-    const formData = new FormData(CreateUser)
-    fetch("http://localhost:3001//users/create", {
-      method: 'POST',
-      body: formData
-    }).then((response) =>{
-      if (!response.ok) {
-        console.log("error!")
-      }
-      const data = response.json()
-      data.then(function(datavalue){
-        console.log(datavalue.message)
-        //apiのmessageを参照
+    const formData = new FormData(LoginForm)
+    try {
+      axios.post('http://localhost:3001//sessions/create', formData , { withCredentials: true } )
+      .then(res => {
+        console.log(res.data.message)
       })
-    })
+    } catch (error) {
+      console.log("error!")
+    }
   }
   const handleChange = (e) => {
     setForm((prevState) => {
