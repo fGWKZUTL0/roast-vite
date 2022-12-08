@@ -8,7 +8,8 @@ import Logout from './User/Logout.jsx'
 import { getCurrentUser } from './api/auth'
 import Header from './Header.jsx'
 
-import { PrivateRoute } from './router/PrivateRouter'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Nav from 'react-bootstrap/Nav';
 
 export const AuthContext = createContext()
 
@@ -52,27 +53,27 @@ function App() {
         }}
       >
         <BrowserRouter>
-          <div className="flex flex-wrap">
-            <div className="w-1/4">
-              <ul>
-                <li>
-                  <Link to="/Home">Home</Link>
+          <div className="row">
+            <div className="col-3">
+              <ul className="nav flex-column m-4 w-50">
+                <li className="nav-item">
+                  <Link className="nav-link btn-link rounded-pill" to="/Home">Home</Link>
                 </li>
-                <li>
-                  <Link to="/Editor">Editor</Link>
+                <li className="nav-item">
+                  <Link className="nav-link btn-link rounded-pill" to="/Editor">Editor</Link>
                 </li>
-                <li>
-                  <Link to="/CreateUser">CreateUser</Link>
+                <li className="nav-item">
+                  <Link className="nav-link btn-link rounded-pill" to="/CreateUser">CreateUser</Link>
                 </li>
-                <li>
-                  <Link to="/Login">Login</Link>
+                <li className="nav-item">
+                  <Link className="nav-link btn-link rounded-pill" to="/Login">Login</Link>
                 </li>
-                <li>
-                  <Link to="/Logout">Logout</Link>
+                <li className="nav-item">
+                  <Link className="nav-link btn-link rounded-pill" to="/Logout">Logout</Link>
                 </li>
               </ul>
             </div>
-            <div className="w-1/2">
+            <div className="col-6">
               <Header />
               <Routes>
                 <Route path="/Home" element={ getCurrentUser === true ? <Home /> : <Navigate replace to="/Login" />}/>
@@ -84,9 +85,8 @@ function App() {
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>
-          </div>
-          <div className="w-1/4">
-
+            <div className="col-3">
+            </div>
           </div>
         </BrowserRouter>
       </AuthContext.Provider>

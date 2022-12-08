@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Header from '../Header'
+
+import { Button, Form } from 'react-bootstrap';
 
 const CreateUser = () => {
   const CreateUser = document.getElementById("CreateUser")
@@ -31,36 +32,31 @@ const CreateUser = () => {
   }
   return (
     <>
-      <form id="CreateUser" name="CreateUser" >
-        <div>
-          <label>
-            Name:
-            <input type="text" name="nickname" placeholder="nickname" onChange={handleChange}/>
-          </label>
-        </div>
-        <div>
-          <label>
-            Email:
-            <input type="email" name="email" placeholder="Email address" onChange={handleChange}/>
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input type="password" name="password" placeholder="password" onChange={handleChange}/>
-          </label>
-        </div>
-        <div>
-          <label>
-            Password Confirmation:
-            <input type="password" name="password_digest" placeholder="password confirmation" onChange={handleChange}/>
-          </label>
-        </div>
-        <div>
-          <input type="button" value="登録" onClick={handleSend}/>
-        </div>
-
-      </form>
+      <Form id="CreateUser" name="CreateUser" >
+        <Form.Group className="mb-3">
+          <Form.Label>Name:</Form.Label>
+          <Form.Control type="text" name="nickname" placeholder="nickname" onChange={handleChange}/>
+          <Form.Text className="text-muted">
+            input your nickname
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control type="email" name="email" placeholder="Email address" onChange={handleChange}/>
+          <Form.Text className="text-muted">
+            input your email-address
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" name="password" placeholder="password" onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password Confirmation:</Form.Label>
+          <Form.Control type="password" name="password_digest" placeholder="password  confirmation" onChange={handleChange}/>
+        </Form.Group>
+        <Button variant="outline-danger" onClick={handleSend}>登録</Button>
+      </Form>
     </>
   )
 }
