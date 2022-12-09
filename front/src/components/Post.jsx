@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios'
+
 import { Link } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +8,17 @@ import Modal from 'react-bootstrap/Modal';
 
 function Post() {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  
+  const handleClose = () => {
+    const postTweet = document.getElementById("postTweet")
+    const formData = new FormData(postTweet)
+    axios.post('http://localhost:3001//tweets/create', formData)
+    .then(res => {
+      console.log(res.data.message)
+    })
+    setShow(false);
+  }
+  
   const handleShow = () => setShow(true);
 
   return (
@@ -21,7 +32,7 @@ function Post() {
           <Modal.Title>Tweet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form id="postTweet">
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
@@ -32,7 +43,7 @@ function Post() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>

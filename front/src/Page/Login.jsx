@@ -6,12 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
 
   const onSubmit = (data) => {
+    setIsLoading(true)
     const LoginForm = document.getElementById("LoginForm")
     const formData = new FormData(LoginForm)
     axios.post('http://localhost:3001//sessions/create', formData )
@@ -19,12 +21,14 @@ const Login = () => {
       sessionStorage.setItem('AUTHORITY', response.headers.authority)
       setIsSignedIn(true)
       console.log(response.data.currentUser)
+      setIsLoading(false)
       navigate('/Home')
     })
   }
 
   return (
     <>
+    {isLoading ? <p>Loading...</p> : 
       <Form id="LoginForm" name="LoginForm" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
           <Form.Label>Email:</Form.Label>
@@ -39,6 +43,7 @@ const Login = () => {
         </Form.Group>
         <Button variant="outline-danger" type="submit">登録</Button>
       </Form>
+    }
     </>
   )
 }

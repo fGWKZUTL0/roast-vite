@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Header from './Header'
+import axios from 'axios'
 import TweetList from './components/TimeLine'
 
 const Home = ({ children }) => {
@@ -10,18 +10,16 @@ const Home = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await window.fetch('http://localhost:3001/tweets/index', {method: "get"})
-        if (!response.ok) throw Error(response.statusText)
-        const data = await response.json()
-        setTweets(data)
+        axios.get('http://localhost:3001/tweets/index')
+        .then(res => {
+          console.log(res.data)
+          setTweets(res.data)
+          setIsLoading(false)
+        })
       } catch (error) {
         setIsError(true)
-        console.error(error)
       }
-
-      setIsLoading(false)
     }
-
     fetchData()
   }, [])
 
