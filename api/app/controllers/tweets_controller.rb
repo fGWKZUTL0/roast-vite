@@ -5,12 +5,12 @@ class TweetsController < ApplicationController
   end
 
   def create
-    user_id = current_user.id
+    user_id = current_user.id #current_userがnullになっている
 
     @tweet = Tweet.new(tweet: params[:tweet], user_id: user_id)
     
     if @tweet.save
-      render json: {message: "success"}
+      render json: {message: "success" }
     else
       render json: {message: "fail"}
     end

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import axios from 'axios'
 
 import { Link } from "react-router-dom"
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
+import Stack from 'react-bootstrap/Stack'
 
 function Post() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
   
   const handleClose = () => {
     const postTweet = document.getElementById("postTweet")
@@ -16,10 +17,10 @@ function Post() {
     .then(res => {
       console.log(res.data.message)
     })
-    setShow(false);
+    setShow(false)
   }
   
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -37,15 +38,15 @@ function Post() {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Control as="textarea" rows={3} placeholder="What's up?"/>
+              <Form.Control as="textarea" rows={3} name="tweet" placeholder="What's up?"/>
             </Form.Group>
           </Form>
+          <Stack direction="horizontal" >
+            <Button variant="primary ms-auto" onClick={handleClose}>
+              Tweet
+            </Button>
+          </Stack>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Submit
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

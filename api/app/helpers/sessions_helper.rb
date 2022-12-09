@@ -15,7 +15,7 @@ module SessionsHelper
   end
 
   def require_login
-    #redirect_to login_path if !logged_in?
+    render json: {message: "You have to Login any Account"}
   end
 
   def log_out

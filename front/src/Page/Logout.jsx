@@ -21,6 +21,12 @@ const Logout = () => {
       navigate('/Login')
     })
   }, [])
+
+  return(
+    <>
+      <p>Loading...</p>
+    </>
+  )
 }
 
 export default Logout
