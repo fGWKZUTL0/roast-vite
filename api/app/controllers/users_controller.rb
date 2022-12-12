@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   require 'securerandom'
-  #before_action :require_login, only: [:show, :destroy]
 
   def new
     @user = User.new

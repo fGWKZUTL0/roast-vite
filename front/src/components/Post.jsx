@@ -15,6 +15,7 @@ function Post() {
     const formData = new FormData(postTweet)
     axios.post('http://localhost:3001//tweets/create', formData)
     .then(res => {
+      axios.defaults.headers.common['X-CSRF-Token'] = res.headers['x-csrf-token']
       console.log(res.data.message)
     })
     setShow(false)

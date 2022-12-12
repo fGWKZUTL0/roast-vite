@@ -2,15 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TimeLine = ({ tweets }) => {
-  const renderTweets2 = (tweetArray) => {
-
-    return tweetArray.map((tweet) => (
-      <li key={tweet.id}>
-        id {tweet.id}, text {tweet.context}
-      </li>
-    ));
-  };
-
+  
   const renderTweets = (tweetArray) => {
     return tweetArray.map((tweet) => (
       <div key={tweet.id} className="row mb-2">
