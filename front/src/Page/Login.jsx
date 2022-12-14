@@ -21,8 +21,9 @@ const Login = () => {
       if(response.data.message === "success"){
         sessionStorage.setItem('AUTHORITY', response.headers.authority)
         setIsSignedIn(true)
+        sessionStorage.setItem('username', response.data.user.username)
         setUsername(response.data.user.username)
-        console.log(response.data.user.username)
+        //console.log(response.data.user.username)
         setIsLoading(false)
         navigate('/Home')
       }else{

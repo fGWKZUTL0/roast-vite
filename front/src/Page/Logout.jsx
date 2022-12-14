@@ -16,6 +16,7 @@ const Logout = () => {
       document.cookie = "JWTTOKEN=; SameSite=None; Secure"
       // SessionStorage の認可情報を削除
       sessionStorage.removeItem('AUTHORITY')
+      sessionStorage.removeItem('username')
       setIsSignedIn(false)
       setUsername("")
       // ログインページへリダイレクト

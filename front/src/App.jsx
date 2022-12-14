@@ -18,13 +18,16 @@ function App() {
   const [username, setUsername] = useState("")
 
   const myAuthority = sessionStorage.getItem('AUTHORITY')
+  const loginedUsername = sessionStorage.getItem('username')
   useEffect(() => {
-    if(myAuthority !== null){
+    if(myAuthority !== null || loginedUsername !== null){
       setIsSignedIn(true)
+      setUsername(loginedUsername)
     }else{
       setIsSignedIn(false)
+      setUsername("")
     }
-  }, [isSignedIn])
+  }, [isSignedIn, username])
 
   // 認証確認メソッド
   // → 認証されていない場合、ログインページにリダイレクト

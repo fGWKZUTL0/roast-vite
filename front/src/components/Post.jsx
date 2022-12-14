@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from "../App"
 
@@ -12,7 +12,7 @@ function Post() {
   const [show, setShow] = useState(false)
   const { username } = useContext(AuthContext)
 
-  const handleClose = () => {
+  const handleSubmit = () => {
     const postTweet = document.getElementById("postTweet")
     const formData = new FormData(postTweet)
     axios.post('http://localhost:3001//tweets/create', formData)
@@ -21,7 +21,9 @@ function Post() {
     })
     setShow(false)
   }
-  
+
+  const handleClose = () => setShow(false)
+
   const handleShow = () => setShow(true)
 
   return (
@@ -45,7 +47,7 @@ function Post() {
             <input type="hidden" name="username" value={username}/>
           </Form>
           <Stack direction="horizontal" >
-            <Button variant="primary ms-auto" onClick={handleClose}>
+            <Button variant="primary ms-auto" onClick={handleSubmit}>
               Tweet
             </Button>
           </Stack>
