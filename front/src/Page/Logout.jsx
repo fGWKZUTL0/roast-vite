@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../App";
+import { AuthContext } from "../App"
 
 const Logout = () => {
   const navigate = useNavigate()
-  const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
+  const { setUsername, setIsSignedIn } = useContext(AuthContext)
 
 	useEffect(() => {
   	const logoutPath = 'http://localhost:3001/sessions/destroy'
@@ -17,6 +17,7 @@ const Logout = () => {
       // SessionStorage の認可情報を削除
       sessionStorage.removeItem('AUTHORITY')
       setIsSignedIn(false)
+      setUsername("")
       // ログインページへリダイレクト
       navigate('/Login')
     })

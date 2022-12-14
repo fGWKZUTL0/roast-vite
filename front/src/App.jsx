@@ -15,7 +15,7 @@ export const AuthContext = createContext()
 function App() {
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const [currentUser, setCurrentUser] = useState()
+  const [username, setUsername] = useState("")
 
   const myAuthority = sessionStorage.getItem('AUTHORITY')
   useEffect(() => {
@@ -58,8 +58,8 @@ function App() {
           setLoading,
           isSignedIn,
           setIsSignedIn,
-          currentUser,
-          setCurrentUser,
+          username,
+          setUsername,
         }}
       >
         <BrowserRouter>

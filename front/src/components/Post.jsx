@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
+import { AuthContext } from "../App"
 
 import { Link } from "react-router-dom"
 import Button from 'react-bootstrap/Button'
@@ -9,7 +10,8 @@ import Stack from 'react-bootstrap/Stack'
 
 function Post() {
   const [show, setShow] = useState(false)
-  
+  const { username } = useContext(AuthContext)
+
   const handleClose = () => {
     const postTweet = document.getElementById("postTweet")
     const formData = new FormData(postTweet)
@@ -40,6 +42,7 @@ function Post() {
             >
               <Form.Control as="textarea" rows={3} name="tweet" placeholder="What's up?"/>
             </Form.Group>
+            <input type="hidden" name="username" value={username}/>
           </Form>
           <Stack direction="horizontal" >
             <Button variant="primary ms-auto" onClick={handleClose}>

@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-  const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
+  const { setUsername, setIsSignedIn } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     setIsLoading(true)
@@ -21,7 +21,8 @@ const Login = () => {
       if(response.data.message === "success"){
         sessionStorage.setItem('AUTHORITY', response.headers.authority)
         setIsSignedIn(true)
-        console.log(response.data.currentUser)
+        setUsername(response.data.user.username)
+        console.log(response.data.user.username)
         setIsLoading(false)
         navigate('/Home')
       }else{

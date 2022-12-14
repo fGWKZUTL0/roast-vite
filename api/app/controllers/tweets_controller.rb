@@ -5,9 +5,8 @@ class TweetsController < ApplicationController
   end
 
   def create
-    user_id = current_user.id #current_userがnullになっている
-
-    @tweet = Tweet.new(tweet: params[:tweet], user_id: user_id)
+    current_user = User.find_by(username: params[:username])
+    @tweet = Tweet.new(tweet: params[:tweet], user_id: current_user.id)
     
     if @tweet.save
       render json: {message: "success" }
