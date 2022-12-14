@@ -8,7 +8,7 @@ const TimeLine = ({ tweets }) => {
       <div key={tweet.id} className="row mb-2">
         <div className="col-12">
           <p className="mb-0">
-            <a className="text-decoration-none" href="">{tweet.user_id}</a>
+            <a className="text-decoration-none" href="">{tweet.nickname}</a>
             :{tweet.tweet}
           </p>
         </div>

@@ -11,7 +11,7 @@ module SessionsHelper
   end
 
   def logged_in?
-    !current_user.nil?
+    user.authrity.nil?
   end
 
   def require_login

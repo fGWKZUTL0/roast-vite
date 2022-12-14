@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   get "sessions/index" => "sessions#index"
   post "sessions/create" => "sessions#create"
-  get "sessions/destroy" => "sessions#destroy"
+  post "sessions/destroy" => "sessions#destroy"
 end

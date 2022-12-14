@@ -19,11 +19,11 @@ const Login = () => {
     axios.post('http://localhost:3001//sessions/create', formData )
     .then((response) => {
       if(response.data.message === "success"){
-        sessionStorage.setItem('AUTHORITY', response.headers.authority)
+        sessionStorage.setItem('AUTHORITY', response.data.AUTHORITY)
         setIsSignedIn(true)
+        console.log(response.data.user.username)
         sessionStorage.setItem('username', response.data.user.username)
         setUsername(response.data.user.username)
-        //console.log(response.data.user.username)
         setIsLoading(false)
         navigate('/Home')
       }else{

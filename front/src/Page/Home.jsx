@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import TimeLine from './TimeLine'
+import TweetLine from '../components/TimeLine'
+import { AuthContext }  from "../App";
 
-const Tweet = () => {
+
+const Home = ({ children }) => {
   const [tweets, setTweets] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
+  const { timeLine, setTimeLine } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +30,9 @@ const Tweet = () => {
     <>
       {isError && <p>Something went wrong. Check the console.</p>}
 
-      {isLoading ? <p>Loading...</p> : <TimeLine tweets={tweets} />}
+      {isLoading ? <p>Loading...</p> : <TweetLine tweets={tweets} />}
     </>
   )
 }
 
-export default Tweet
+export default Home

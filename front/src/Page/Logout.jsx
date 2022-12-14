@@ -10,7 +10,7 @@ const Logout = () => {
 	useEffect(() => {
   	const logoutPath = 'http://localhost:3001/sessions/destroy'
     // ログアウト API へ POST
-    axios.get(logoutPath)
+    axios.post(logoutPath, {AUTHORITY: sessionStorage.getItem('AUTHORITY')})
     .then((response)=>{
       // Cookies の JWTTOKEN のバリューを削除
       document.cookie = "JWTTOKEN=; SameSite=None; Secure"

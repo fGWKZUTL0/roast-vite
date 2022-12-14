@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
 import axios from 'axios'
-import Home from './Home'
+import Home from './Page/Home'
 import CreateUser from './Page/CreateUser.jsx'
 import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
-import Header from './Header.jsx'
+import Header from './Page/Header.jsx'
 import NavBar from './components/NavBar.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [username, setUsername] = useState("")
+  const [timeLine, setTimeLine] = useState([])
 
   const myAuthority = sessionStorage.getItem('AUTHORITY')
   const loginedUsername = sessionStorage.getItem('username')
@@ -63,6 +64,8 @@ function App() {
           setIsSignedIn,
           username,
           setUsername,
+          timeLine,
+          setTimeLine,
         }}
       >
         <BrowserRouter>
