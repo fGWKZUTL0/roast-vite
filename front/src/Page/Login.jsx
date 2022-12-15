@@ -47,7 +47,7 @@ const Login = () => {
           <Form.Label>Password:</Form.Label>
           <Form.Control type="password" name="password" placeholder="password"/>
         </Form.Group>
-        <Button variant="outline-danger" type="submit">登録</Button>
+        <Button variant="outline-danger" type="submit">ログイン</Button>
       </Form>
     }
     </>

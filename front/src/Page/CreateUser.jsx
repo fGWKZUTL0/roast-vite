@@ -7,14 +7,13 @@ const CreateUser = () => {
 
   const CreateUser = document.getElementById("CreateUser")
 
-  const [form, setForm] = useState({name:'', email:'', password:'', password_digest:''});
+  const [form, setForm] = useState({nickname:'', email:'', password:'', password_digest:''});
   const handleSend = (e) => {
     setIsLoading(true)
     const formData = new FormData(CreateUser)
     try {
-      axios.post('http://localhost:3001//users/create', formData)
+      axios.post('http://localhost:3001//auth', formData)
       .then(res => {
-        console.log(res.data.message)
         setIsLoading(false)
       })
     } catch (error) {
@@ -34,13 +33,6 @@ const CreateUser = () => {
       {isLoading ? <p>Loading...</p> : 
         <Form id="CreateUser" name="CreateUser" >
           <Form.Group className="mb-3">
-            <Form.Label>Name:</Form.Label>
-            <Form.Control type="text" name="nickname" placeholder="nickname" onChange={handleChange}/>
-            <Form.Text className="text-muted">
-              input your nickname
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3">
             <Form.Label>Email:</Form.Label>
             <Form.Control type="email" name="email" placeholder="Email address" onChange={handleChange}/>
             <Form.Text className="text-muted">
@@ -53,7 +45,7 @@ const CreateUser = () => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password Confirmation:</Form.Label>
-            <Form.Control type="password" name="password_digest" placeholder="password  confirmation" onChange={handleChange}/>
+            <Form.Control type="password" name="password_confirmation" placeholder="password  confirmation" onChange={handleChange}/>
           </Form.Group>
           <Button variant="outline-danger" onClick={handleSend}>登録</Button>
         </Form>
