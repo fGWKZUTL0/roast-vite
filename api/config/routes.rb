@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    registrations: 'auth/registrations'
-  }
+  mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
   
   get "tweets/index" => "tweets#index"
   post "tweets/create" => "tweets#create"
