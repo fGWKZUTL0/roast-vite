@@ -18,24 +18,12 @@ function App() {
   const [username, setUsername] = useState("")
   const [timeLine, setTimeLine] = useState([])
 
-  const myAuthority = sessionStorage.getItem('AUTHORITY')
-  const loginedUsername = sessionStorage.getItem('username')
-  useEffect(() => {
-    if(myAuthority !== null || loginedUsername !== null){
-      setIsSignedIn(true)
-      setUsername(loginedUsername)
-    }else{
-      setIsSignedIn(false)
-      setUsername("")
-    }
-  }, [isSignedIn, username])
-
   // 認証確認メソッド
   // → 認証されていない場合、ログインページにリダイレクト
   const RequireAuth = ( props ) => {
     
     // 権限が「GENERAL」の場合、渡されたコンポーネントをレンダリング
-    if(myAuthority !== null){
+    if(isSignedIn !== false){
       return props.component;
     }
     // 権限がない場合、ログインページへリダイレクト
@@ -47,7 +35,7 @@ function App() {
 
     // 権限がない場合、渡されたこのポーネントをレンダリング
     // ※ ログインページとユーザ新規登録ページに適用
-    if(myAuthority === null){
+    if(isSignedIn === false){
       return props.component;
     }
     // 権限が存在する場合、メディア一覧ページへリダイレクト

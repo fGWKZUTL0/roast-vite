@@ -8,19 +8,20 @@ const Logout = () => {
   const { setUsername, setIsSignedIn } = useContext(AuthContext)
 
 	useEffect(() => {
-  	const logoutPath = 'http://localhost:3001/sessions/destroy'
+  	const logoutPath = 'http://localhost:3001//auth/sign_out'
     // ログアウト API へ POST
-    axios.post(logoutPath, {AUTHORITY: sessionStorage.getItem('AUTHORITY')})
-    .then((response)=>{
-      // Cookies の JWTTOKEN のバリューを削除
-      document.cookie = "JWTTOKEN=; SameSite=None; Secure"
-      // SessionStorage の認可情報を削除
-      sessionStorage.removeItem('AUTHORITY')
-      sessionStorage.removeItem('username')
-      setIsSignedIn(false)
-      setUsername("")
-      // ログインページへリダイレクト
-      navigate('/Login')
+    axios.delete(logoutPath,{ headers: {
+      "uid": sessionStorage.getItem('uid'),
+      "client": sessionStorage.getItem('client'),
+      "access-token": sessionStorage.getItem('access-token'),
+    }})
+    .then((res)=>{
+      if(res.data.success === true){
+        setIsSignedIn(false)
+        // ログインページへリダイレクト
+        navigate('/Login')
+      }
+      console.log(res.data.success)
     })
   }, [])
 

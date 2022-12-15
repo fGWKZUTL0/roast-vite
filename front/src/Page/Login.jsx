@@ -16,19 +16,14 @@ const Login = () => {
     setIsLoading(true)
     const LoginForm = document.getElementById("LoginForm")
     const formData = new FormData(LoginForm)
-    axios.post('http://localhost:3001//sessions/create', formData )
+    axios.post('http://localhost:3001//auth/sign_in', formData )
     .then((response) => {
-      if(response.data.message === "success"){
-        sessionStorage.setItem('AUTHORITY', response.data.AUTHORITY)
-        setIsSignedIn(true)
-        console.log(response.data.user.username)
-        sessionStorage.setItem('username', response.data.user.username)
-        setUsername(response.data.user.username)
-        setIsLoading(false)
-        navigate('/Home')
-      }else{
-        console.log(response.data.message)
-      }
+      sessionStorage.setItem('uid', response.headers['uid'])
+      sessionStorage.setItem('access-token', response.headers['access-token'])
+      sessionStorage.setItem('client', response.headers['client'])
+      setIsSignedIn(true)
+      setIsLoading(false)
+      navigate('/Home')
     })
   }
 
