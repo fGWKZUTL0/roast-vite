@@ -20,7 +20,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    #@user = User.find(params[:id])
+    if user_signed_in?
+      render json: { user: current_user}
+    else
+      render json: { success: false}
+    end
   end
 
   def edit

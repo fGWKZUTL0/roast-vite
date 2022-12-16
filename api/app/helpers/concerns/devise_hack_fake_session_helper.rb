@@ -1,0 +1,2 @@
+module Concerns::DeviseHackFakeSessionHelper
+end

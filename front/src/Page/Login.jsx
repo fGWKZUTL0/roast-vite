@@ -13,14 +13,18 @@ const Login = () => {
   const { setUsername, setIsSignedIn } = useContext(AuthContext);
 
   const onSubmit = (data) => {
+
     setIsLoading(true)
     const LoginForm = document.getElementById("LoginForm")
     const formData = new FormData(LoginForm)
-    axios.post('http://localhost:3001//auth/sign_in', formData )
+
+    axios.post('http://localhost:3001/auth/sign_in', formData )
     .then((response) => {
       sessionStorage.setItem('uid', response.headers['uid'])
       sessionStorage.setItem('access-token', response.headers['access-token'])
       sessionStorage.setItem('client', response.headers['client'])
+      sessionStorage.setItem('expiry', response.headers['expiry'])
+      sessionStorage.setItem('token-type', response.headers['token-type'])
       setIsSignedIn(true)
       setIsLoading(false)
       navigate('/Home')
