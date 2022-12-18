@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
+import Spinner from 'react-bootstrap/Spinner'
+
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-  const { setIsSignedIn, setToken } = useContext(AuthContext);
+  const { setIsSignedIn, token, setToken } = useContext(AuthContext);
 
   const onSubmit = (data) => {
 
@@ -29,7 +31,11 @@ const Login = () => {
           'token-type': response.headers['token-type'],
         }
       })
-      
+      localStorage.setItem('uid', response.headers['uid'])
+      localStorage.setItem('access-token', response.headers['access-token'])
+      localStorage.setItem('client', response.headers['client'])
+      localStorage.setItem('expiry', response.headers['expiry'])
+      localStorage.setItem('token-type', response.headers['token-type'])
       setIsSignedIn(true)
       setIsLoading(false)
       navigate('/Home')
@@ -38,7 +44,11 @@ const Login = () => {
 
   return (
     <>
-    {isLoading ? <p>Loading...</p> : 
+    { isLoading ? 
+      <Spinner animation="border" role="status" variant="primary">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+      : 
       <Form id="LoginForm" name="LoginForm" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
           <Form.Label>Email:</Form.Label>

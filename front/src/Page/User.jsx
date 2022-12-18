@@ -3,6 +3,7 @@ import axios from 'axios'
 import TweetLine from '../components/TimeLine'
 import { AuthContext }  from "../App";
 
+import Spinner from 'react-bootstrap/Spinner'
 
 const User = () => {
   const [name, setName] = useState("")
@@ -16,7 +17,7 @@ const User = () => {
         axios.get('http://localhost:3001/users/show', token)
         .then(res => {
           console.log(res.data)
-          setName(res.data.name)
+          setName(res.data.current_user.id)
           setIsLoading(false)
         })
       } catch (error) {
@@ -30,7 +31,12 @@ const User = () => {
     <>
       {isError && <p>Something went wrong. Check the console.</p>}
 
-      {isLoading ? <p>Loading...</p> : <p>{name}</p>}
+      {isLoading ? 
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      : 
+        <p>{name}</p>}
     </>
   )
 }

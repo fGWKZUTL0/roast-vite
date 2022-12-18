@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 
+import Spinner from 'react-bootstrap/Spinner'
+
 const Logout = () => {
   const navigate = useNavigate()
   const { setIsSignedIn, token, setToken } = useContext(AuthContext)
@@ -15,6 +17,7 @@ const Logout = () => {
       if(res.data.success === true){
         setIsSignedIn(false)
         setToken([])
+
         // ログインページへリダイレクト
         navigate('/Login')
       }
@@ -23,9 +26,9 @@ const Logout = () => {
   }, [])
 
   return(
-    <>
-      <p>Loading...</p>
-    </>
+    <Spinner animation="border" role="status" variant="danger">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
   )
 }
 

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useNavigate , Link } from "react-router-dom"
 import axios from 'axios'
 import Home from './Page/Home'
 import User from './Page/User'
@@ -8,6 +8,7 @@ import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
 import Header from './Page/Header.jsx'
 import NavBar from './components/NavBar.jsx'
+import Spinner from 'react-bootstrap/Spinner'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,34 +19,53 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [username, setUsername] = useState("")
   const [timeLine, setTimeLine] = useState([])
-  const [token, setToken] = useState([])
+  const [token, setToken] = useState({
+    headers:{
+      'uid': localStorage.getItem('uid'),
+      'access-token': localStorage.getItem('access-token'),
+      'client': localStorage.getItem('client'),
+      'expiry': localStorage.getItem('expiry'),
+      'token-type': localStorage.getItem('token-type'),
+    }
+  })
+
+  useEffect(() => {
+    if(isSignedIn === false){
+      axios.get('http://localhost:3001/users/show', token)
+      .then(res => {
+        if(res.data.success === true){
+          setIsSignedIn(true)
+        }
+        setLoading(false)
+      })
+    }
+  }, [])
 
   // 認証確認メソッド
   // → 認証されていない場合、ログインページにリダイレクト
   const RequireAuth = ( props ) => {
-    
     // 権限が「GENERAL」の場合、渡されたコンポーネントをレンダリング
-    if(isSignedIn !== false){
-      return props.component;
+    if(isSignedIn === true){
+      return props.component
     }
     // 権限がない場合、ログインページへリダイレクト
-    document.location = "/Login";
+    document.location = "/Login"
   }
 
   // 非認証確認メソッド
   const RequireNoAuth = ( props ) => {
-
     // 権限がない場合、渡されたこのポーネントをレンダリング
     // ※ ログインページとユーザ新規登録ページに適用
     if(isSignedIn === false){
-      return props.component;
+      return props.component
     }
-    // 権限が存在する場合、メディア一覧ページへリダイレクト
-    document.location = "/Home";
   }
 
   return(
     <div className="App contents">
+      { loading ?
+        <></>
+      :
       <AuthContext.Provider
         value={{
           loading,
@@ -81,6 +101,7 @@ function App() {
           </div>
         </BrowserRouter>
       </AuthContext.Provider>
+      }
     </div>
   )  
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import TweetLine from '../components/TimeLine'
 import { AuthContext }  from "../App";
+import Spinner from 'react-bootstrap/Spinner'
 
 
 const Home = ({ children }) => {
@@ -30,7 +31,11 @@ const Home = ({ children }) => {
     <>
       {isError && <p>Something went wrong. Check the console.</p>}
 
-      {isLoading ? <p>Loading...</p> : <TweetLine tweets={tweets} />}
+      {isLoading ? 
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      : <TweetLine tweets={tweets} />}
     </>
   )
 }
