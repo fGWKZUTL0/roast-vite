@@ -9,14 +9,11 @@ class TweetsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:username])
-    if user.authority != params[:AUTHORITY]
-      render json: {status: 500}
-    end
-    @tweet = Tweet.new(tweet: params[:tweet], user_id: user.id)
+
+    @tweet = Tweet.new(tweet: params[:tweet], user_id: current_user.id)
     
     if @tweet.save
-      render json: {status: 200, tweet: @tweet, user: user}
+      render json: {status: 200, tweet: @tweet}
     else
       render json: {status: 500}
     end

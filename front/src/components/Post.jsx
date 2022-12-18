@@ -10,13 +10,12 @@ import Stack from 'react-bootstrap/Stack'
 
 function Post() {
   const [show, setShow] = useState(false)
-  const username = sessionStorage.getItem('username')
-  const Authority = sessionStorage.getItem('AUTHORITY')
+  const { token } = useContext(AuthContext)
 
   const handleSubmit = () => {
     const postTweet = document.getElementById("postTweet")
     const formData = new FormData(postTweet)
-    axios.post('http://localhost:3001//tweets/create', formData)
+    axios.post('http://localhost:3001//tweets/create', formData, token)
     .then(res => {
       console.log(res.data.status)
     })
@@ -45,8 +44,6 @@ function Post() {
             >
               <Form.Control as="textarea" rows={3} name="tweet" placeholder="What's up?"/>
             </Form.Group>
-            <input type="hidden" name="username" value={username? username : ""}/>
-            <input type="hidden" name="AUTHORITY" value={Authority? Authority : ""}/>
           </Form>
           <Stack direction="horizontal" >
             <Button variant="primary ms-auto" onClick={handleSubmit}>

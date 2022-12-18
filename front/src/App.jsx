@@ -18,6 +18,7 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [username, setUsername] = useState("")
   const [timeLine, setTimeLine] = useState([])
+  const [token, setToken] = useState([])
 
   // 認証確認メソッド
   // → 認証されていない場合、ログインページにリダイレクト
@@ -55,6 +56,8 @@ function App() {
           setUsername,
           timeLine,
           setTimeLine,
+          token,
+          setToken,
         }}
       >
         <BrowserRouter>

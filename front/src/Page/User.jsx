@@ -8,19 +8,12 @@ const User = () => {
   const [name, setName] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const { timeLine, setTimeLine } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get('http://localhost:3001/users/show',{ 
-          headers: {
-          "uid": sessionStorage.getItem('uid'),
-          "client": sessionStorage.getItem('client'),
-          "access-token": sessionStorage.getItem('access-token'),
-          "expiry": sessionStorage.getItem('expiry'),
-          "token-type": sessionStorage.getItem('token-type'),}
-        })
+        axios.get('http://localhost:3001/users/show', token)
         .then(res => {
           console.log(res.data)
           setName(res.data.name)
