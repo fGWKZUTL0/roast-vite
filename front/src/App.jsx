@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"
 import axios from 'axios'
 import Home from './Page/Home'
+import User from './Page/User'
 import CreateUser from './Page/CreateUser.jsx'
 import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
@@ -68,6 +69,7 @@ function App() {
                 <Route path='/Login' element={<RequireNoAuth component={<Login />} />} />
                 <Route path={'/CreateUser'} element={<CreateUser />} />
                 <Route path={'/Logout'} element={<Logout setIsSignedIn={setIsSignedIn} />} />
+                <Route path="/User" element={<RequireAuth component={<User />} />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>

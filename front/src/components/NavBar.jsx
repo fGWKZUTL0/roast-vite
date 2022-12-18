@@ -13,6 +13,9 @@ const NavBar = () => {
         <Link className="nav-link btn-link rounded-pill text-center" to="/Home">Home</Link>
       </li>
       <li className="nav-item">
+        <Link className="nav-link btn-link rounded-pill text-center" to="/User">User</Link>
+      </li>
+      <li className="nav-item">
         <Link className="nav-link btn-link rounded-pill text-center" to="/CreateUser">CreateUser</Link>
       </li>
       <li className="nav-item">

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   require 'securerandom'
-  #before_action :require_login, only: [:show, :destroy]
 
   def new
     @user = User.new
@@ -20,11 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      render json: { user: current_user}
-    else
-      render json: { success: false}
-    end
+    render json: current_user
   end
 
   def edit

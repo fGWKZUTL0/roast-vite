@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable
+          :recoverable, :rememberable, :validatable, :trackable
   include DeviseTokenAuth::Concerns::User
 
   has_many :tweets #関連名
