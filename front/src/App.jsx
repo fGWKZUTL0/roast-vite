@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useRef } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate , Link } from "react-router-dom"
 import axios from 'axios'
 import Home from './Page/Home'
@@ -16,7 +16,7 @@ export const AuthContext = createContext()
 function App() {
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const [username, setUsername] = useState("")
+  const tweets = useRef([])
   const [timeLine, setTimeLine] = useState([])
   const [token, setToken] = useState({
     headers:{
@@ -71,12 +71,11 @@ function App() {
           setLoading,
           isSignedIn,
           setIsSignedIn,
-          username,
-          setUsername,
           timeLine,
           setTimeLine,
           token,
           setToken,
+          tweets,
         }}
       >
         <BrowserRouter>
