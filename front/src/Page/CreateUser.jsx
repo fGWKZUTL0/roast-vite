@@ -33,6 +33,13 @@ const CreateUser = () => {
       {isLoading ? <p>Loading...</p> : 
         <Form id="CreateUser" name="CreateUser" >
           <Form.Group className="mb-3">
+            <Form.Label>Nickname:</Form.Label>
+            <Form.Control type="text" name="nickname" placeholder="Nickname" onChange={handleChange}/>
+            <Form.Text className="text-muted">
+              input your Nickname
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3">
             <Form.Label>Email:</Form.Label>
             <Form.Control type="email" name="email" placeholder="Email address" onChange={handleChange}/>
             <Form.Text className="text-muted">

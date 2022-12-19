@@ -9,12 +9,12 @@ const Home = ({ children }) => {
   const [tweets, setTweets] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const { timeLine, setTimeLine } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get('http://localhost:3001/tweets/index')
+        axios.get('http://localhost:3001/tweets/index', token)
         .then(res => {
           console.log(res.data)
           setTweets(res.data)
