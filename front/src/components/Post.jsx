@@ -10,7 +10,7 @@ import Stack from 'react-bootstrap/Stack'
 
 function Post() {
   const [show, setShow] = useState(false)
-  const { token } = useContext(AuthContext)
+  const { token, tweets } = useContext(AuthContext)
 
   const handleSubmit = () => {
     const postTweet = document.getElementById("postTweet")
@@ -18,6 +18,7 @@ function Post() {
     axios.post('http://localhost:3001//tweets/create', formData, token)
     .then(res => {
       console.log(res.data.status)
+      tweets.current.unshift(res.data.tweet)
     })
     setShow(false)
   }

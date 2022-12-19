@@ -2,14 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import TweetLine from '../components/TimeLine'
 import { AuthContext }  from "../App";
-import Spinner from 'react-bootstrap/Spinner'
+import SpinnerTag from '../components/SpinnerTag'
 
-const Home = ({ children }) => {
-  const [tweets, setTweets] = useState([])
+const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-
-  const { token } = useContext(AuthContext)
+  const { token, tweets } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +15,7 @@ const Home = ({ children }) => {
         axios.get('http://localhost:3001/tweets/index', token)
         .then(res => {
           console.log(res.data)
-          setTweets(res.data)
+          tweets.current = res.data
           setIsLoading(false)
         })
       } catch (error) {
@@ -32,12 +30,8 @@ const Home = ({ children }) => {
       {isError && <p>Something went wrong. Check the console.</p>}
 
       {isLoading ? 
-        <div className="d-flex justify-content-center">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      : <TweetLine tweets={tweets} />}
+        <SpinnerTag />
+      : <TweetLine tweets={tweets.current} />}
     </>
   )
 }

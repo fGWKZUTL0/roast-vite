@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
-import Spinner from 'react-bootstrap/Spinner'
+import SpinnerTag from '../components/SpinnerTag'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -45,9 +45,7 @@ const Login = () => {
   return (
     <>
     { isLoading ? 
-      <Spinner animation="border" role="status" variant="primary">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <SpinnerTag />
       : 
       <Form id="LoginForm" name="LoginForm" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">

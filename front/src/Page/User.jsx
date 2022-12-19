@@ -3,7 +3,7 @@ import axios from 'axios'
 import TweetLine from '../components/TimeLine'
 import { AuthContext }  from "../App";
 
-import Spinner from 'react-bootstrap/Spinner'
+import SpinnerTag from '../components/SpinnerTag'
 
 const User = () => {
   const [name, setName] = useState("")
@@ -32,9 +32,7 @@ const User = () => {
       {isError && <p>Something went wrong. Check the console.</p>}
 
       {isLoading ? 
-        <Spinner animation="border" role="status" variant="primary">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <SpinnerTag />
       : 
         <p>{name}</p>}
     </>

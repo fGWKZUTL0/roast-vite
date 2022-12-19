@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import Spinner from 'react-bootstrap/Spinner'
 
 const SpinnerTag = () => {
   return (

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 
-import Spinner from 'react-bootstrap/Spinner'
+import SpinnerTag from '../components/SpinnerTag'
 
 const Logout = () => {
   const navigate = useNavigate()
@@ -26,9 +26,7 @@ const Logout = () => {
   }, [])
 
   return(
-    <Spinner animation="border" role="status" variant="danger">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>
+    <SpinnerTag />
   )
 }
 
