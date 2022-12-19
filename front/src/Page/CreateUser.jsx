@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 
+import Spinner from 'react-bootstrap/Spinner'
+
 const CreateUser = () => {
   const [isLoading, setIsLoading] = useState(false)
 
@@ -30,8 +32,19 @@ const CreateUser = () => {
   }
   return (
     <>
-      {isLoading ? <p>Loading...</p> : 
+      {isLoading ? 
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> 
+        : 
         <Form id="CreateUser" name="CreateUser" >
+          <Form.Group className="mb-3">
+            <Form.Label>nickname:</Form.Label>
+            <Form.Control type="text" name="nickname" placeholder="nickname" onChange={handleChange}/>
+            <Form.Text className="text-muted">
+              input your nickname
+            </Form.Text>
+          </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Email:</Form.Label>
             <Form.Control type="email" name="email" placeholder="Email address" onChange={handleChange}/>

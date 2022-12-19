@@ -8,7 +8,6 @@ import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
 import Header from './Page/Header.jsx'
 import NavBar from './components/NavBar.jsx'
-import Spinner from 'react-bootstrap/Spinner'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -85,7 +84,7 @@ function App() {
             <div className="col-3">
               <NavBar />
             </div>
-            <div className="col-6">
+            <div className="col-5">
               <Header />
               <Routes>
                 <Route path="/Home" element={<RequireAuth component={<Home />} />} />
@@ -96,7 +95,7 @@ function App() {
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>
-            <div className="col-3">
+            <div className="col-4">
             </div>
           </div>
         </BrowserRouter>

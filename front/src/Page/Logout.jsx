@@ -19,7 +19,7 @@ const Logout = () => {
         setToken([])
 
         // ログインページへリダイレクト
-        navigate('/Login')
+        document.location = '/Login'
       }
       console.log(res.data.success)
     })

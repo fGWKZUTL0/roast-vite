@@ -4,12 +4,10 @@ import TweetLine from '../components/TimeLine'
 import { AuthContext }  from "../App";
 import Spinner from 'react-bootstrap/Spinner'
 
-
 const Home = ({ children }) => {
   const [tweets, setTweets] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const { timeLine, setTimeLine } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,9 +30,11 @@ const Home = ({ children }) => {
       {isError && <p>Something went wrong. Check the console.</p>}
 
       {isLoading ? 
-        <Spinner animation="border" role="status" variant="primary">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        <div className="d-flex justify-content-center">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
       : <TweetLine tweets={tweets} />}
     </>
   )
