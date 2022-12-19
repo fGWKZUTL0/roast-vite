@@ -39,10 +39,10 @@ const CreateUser = () => {
         : 
         <Form id="CreateUser" name="CreateUser" >
           <Form.Group className="mb-3">
-            <Form.Label>nickname:</Form.Label>
-            <Form.Control type="text" name="nickname" placeholder="nickname" onChange={handleChange}/>
+            <Form.Label>Nickname:</Form.Label>
+            <Form.Control type="text" name="nickname" placeholder="Nickname" onChange={handleChange}/>
             <Form.Text className="text-muted">
-              input your nickname
+              input your Nickname
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3">
