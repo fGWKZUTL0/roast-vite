@@ -3,7 +3,6 @@ import axios from 'axios'
 import { AuthContext } from "../../App"
 import { TweetContext } from "../Home"
 
-import { Link } from "react-router-dom"
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'

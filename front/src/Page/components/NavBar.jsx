@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { AuthContext }  from "../../App";
+//import { Post } from './Post'
+
 const NavBar = () => {
 
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
