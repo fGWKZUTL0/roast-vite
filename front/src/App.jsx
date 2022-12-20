@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useRef } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate , Link } from "react-router-dom"
 import axios from 'axios'
 import Home from './Page/Home'
@@ -7,7 +7,7 @@ import CreateUser from './Page/CreateUser.jsx'
 import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
 import Header from './Page/Header.jsx'
-import NavBar from './components/NavBar.jsx'
+import NavBar from './Page/components/NavBar.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +16,7 @@ export const AuthContext = createContext()
 function App() {
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const tweets = useRef([])
+  const [tweets, setTweets] = useState([])
   const [timeLine, setTimeLine] = useState([])
   const [token, setToken] = useState({
     headers:{
@@ -76,6 +76,7 @@ function App() {
           token,
           setToken,
           tweets,
+          setTweets
         }}
       >
         <BrowserRouter>

@@ -1,21 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import axios from 'axios'
-import TweetLine from '../components/TimeLine'
+import TweetLine from './components/TimeLine'
 import { AuthContext }  from "../App";
-import SpinnerTag from '../components/SpinnerTag'
+import Post from './components/Post'
+import SpinnerTag from './components/SpinnerTag'
+
+export const TweetContext = createContext()
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-  const { token, tweets } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
+  const [tweets, setTweets ]  = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         axios.get('http://localhost:3001/tweets/index', token)
         .then(res => {
-          console.log(res.data)
-          tweets.current = res.data
+          setTweets(res.data.tweets)
           setIsLoading(false)
         })
       } catch (error) {
@@ -29,9 +32,16 @@ const Home = () => {
     <>
       {isError && <p>Something went wrong. Check the console.</p>}
 
-      {isLoading ? 
-        <SpinnerTag />
-      : <TweetLine tweets={tweets.current} />}
+      {isLoading 
+      ?  <SpinnerTag />
+      : <TweetContext.Provider
+        value={{
+          tweets,
+          setTweets
+        }}>
+          <Post />
+          <TweetLine tweets={tweets} />
+        </TweetContext.Provider>}
     </>
   )
 }

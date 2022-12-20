@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const TimeLine = ({ tweets }) => {
 
-  const renderTweets = (tweetArray) => {
-    console.log(tweetArray.length)
-    return (
-      tweetArray.length !== 0 ?
-        tweetArray.map((tweet) => (
+  return (
+    <div className="TimeLine">
+      {      
+        tweets.length !== 0 ?
+        tweets.map((tweet) => (
           <div key={tweet.id} className="row mb-2">
             <div className="col-12">
               <p className="mb-0">
@@ -18,15 +18,9 @@ const TimeLine = ({ tweets }) => {
           </div>
         ))
       :
-      <></>
-    )
-  }
-
-  return (
-    <div className="TimeLine">
-      {renderTweets(tweets)}
+      <></>}
     </div>
   );
 };
 
-export default TimeLine;
+export default TimeLine

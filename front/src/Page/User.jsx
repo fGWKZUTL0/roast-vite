@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import TweetLine from '../components/TimeLine'
+import TweetLine from './components/TimeLine'
 import { AuthContext }  from "../App";
 
-import SpinnerTag from '../components/SpinnerTag'
+import SpinnerTag from './components/SpinnerTag'
 
 const User = () => {
   const [name, setName] = useState("")
@@ -17,7 +17,7 @@ const User = () => {
         axios.get('http://localhost:3001/users/show', token)
         .then(res => {
           console.log(res.data)
-          setName(res.data.current_user.id)
+          setName(res.data.current_user.nickname)
           setIsLoading(false)
         })
       } catch (error) {

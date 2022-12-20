@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 
-import SpinnerTag from '../components/SpinnerTag'
+import SpinnerTag from './components/SpinnerTag'
 
 const Logout = () => {
   const navigate = useNavigate()

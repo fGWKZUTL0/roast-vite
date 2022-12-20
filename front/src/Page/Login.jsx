@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
-import SpinnerTag from '../components/SpinnerTag'
+import SpinnerTag from './components/SpinnerTag'
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false)

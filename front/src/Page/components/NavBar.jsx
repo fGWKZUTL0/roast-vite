@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { AuthContext }  from "../App";
-import Post from '../components/Post'
+import { AuthContext }  from "../../App";
 const NavBar = () => {
 
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
@@ -21,9 +20,6 @@ const NavBar = () => {
       <li className="nav-item">
         {isSignedIn ? <Link className="nav-link btn-link rounded-pill text-center" to="/Logout">Logout</Link> :
         <Link className="nav-link btn-link rounded-pill text-center" to="/Login">Login</Link>}
-      </li>
-      <li className="nav-item">
-        <Post/>
       </li>
     </Nav>
   )

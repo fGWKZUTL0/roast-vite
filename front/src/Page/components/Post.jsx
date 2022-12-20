@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import { AuthContext } from "../App"
+import { AuthContext } from "../../App"
+import { TweetContext } from "../Home"
 
 import { Link } from "react-router-dom"
 import Button from 'react-bootstrap/Button'
@@ -8,30 +9,32 @@ import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
 
-function Post() {
+const Post = () => {
   const [show, setShow] = useState(false)
-  const { token, tweets } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
+  const {tweets, setTweets } = useContext(TweetContext)
+
+  const handleClose = () => setShow(false)
+
+  const handleShow = () => setShow(true)
 
   const handleSubmit = () => {
     const postTweet = document.getElementById("postTweet")
     const formData = new FormData(postTweet)
     axios.post('http://localhost:3001//tweets/create', formData, token)
     .then(res => {
-      console.log(res.data.status)
-      tweets.current.unshift(res.data.tweet)
+      //console.log(res.data.status)
+      setTweets([res.data.tweet[0], ...tweets])
+      console.log(res.data.tweet.id)
     })
     setShow(false)
   }
 
-  const handleClose = () => setShow(false)
-
-  const handleShow = () => setShow(true)
-
   return (
     <>
-      <Link className="nav-link btn-link rounded-pill text-center" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         Tweet
-      </Link>
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
