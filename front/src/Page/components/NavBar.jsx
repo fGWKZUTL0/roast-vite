@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { AuthContext }  from "../../App";
-//import { Post } from './Post'
+import Post from './Post'
 
 const NavBar = () => {
 
@@ -22,6 +22,9 @@ const NavBar = () => {
       <li className="nav-item">
         {isSignedIn ? <Link className="nav-link btn-link rounded-pill text-center" to="/Logout">Logout</Link> :
         <Link className="nav-link btn-link rounded-pill text-center" to="/Login">Login</Link>}
+      </li>
+      <li>
+        <Post />
       </li>
     </Nav>
   )

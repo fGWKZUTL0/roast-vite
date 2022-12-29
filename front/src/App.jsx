@@ -1,6 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useRef } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate , Link } from "react-router-dom"
 import axios from 'axios'
+import store from './Store'
+import { Provider } from 'react-redux'
+
 import Home from './Page/Home'
 import User from './Page/User'
 import CreateUser from './Page/CreateUser.jsx'
@@ -14,10 +17,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const AuthContext = createContext()
 
 function App() {
+  
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
-  const [tweets, setTweets] = useState([])
-  const [timeLine, setTimeLine] = useState([])
   const [token, setToken] = useState({
     headers:{
       'uid': localStorage.getItem('uid'),
@@ -71,14 +73,11 @@ function App() {
           setLoading,
           isSignedIn,
           setIsSignedIn,
-          timeLine,
-          setTimeLine,
           token,
-          setToken,
-          tweets,
-          setTweets
+          setToken
         }}
       >
+      <Provider store={store}>
         <BrowserRouter>
           <div className="row">
             <div className="col-3">
@@ -99,6 +98,7 @@ function App() {
             </div>
           </div>
         </BrowserRouter>
+      </Provider>
       </AuthContext.Provider>
       }
     </div>

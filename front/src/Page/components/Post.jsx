@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from "../../App"
-import { TweetContext } from "../Home"
 
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
 
+import { useDispatch } from 'react-redux'
+import { addTweets } from '../../reducer/tweetsSlice'
+
 const Post = () => {
+  const dispatch = useDispatch()
   const [show, setShow] = useState(false)
   const { token } = useContext(AuthContext)
-  const {tweets, setTweets } = useContext(TweetContext)
 
   const handleClose = () => setShow(false)
 
@@ -22,9 +24,7 @@ const Post = () => {
     const formData = new FormData(postTweet)
     axios.post('http://localhost:3001//tweets/create', formData, token)
     .then(res => {
-      //console.log(res.data.status)
-      setTweets([res.data.tweet[0], ...tweets])
-      console.log(res.data.tweet.id)
+      dispatch(addTweets(res.data.tweet))
     })
     setShow(false)
   }
