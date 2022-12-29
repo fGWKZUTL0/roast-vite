@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import TweetLine from './components/TimeLine'
+import { useParams } from "react-router-dom"
 import { AuthContext }  from "../App";
 
 import SpinnerTag from './components/SpinnerTag'
 
 const User = () => {
-  const [name, setName] = useState("")
+  const {nickname} = useParams()
+
+  const [user, setUser] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const { token } = useContext(AuthContext)
@@ -14,10 +16,10 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get('http://localhost:3001/users/show', token)
+        axios.post('http://localhost:3001/users/show', { nickname: nickname }, token)
         .then(res => {
           console.log(res.data)
-          setName(res.data.current_user.nickname)
+          setUser(res.data.user)
           setIsLoading(false)
         })
       } catch (error) {
@@ -34,7 +36,7 @@ const User = () => {
       {isLoading ? 
         <SpinnerTag />
       : 
-        <p>{name}</p>}
+        <p>{user.nickname}</p>}
     </>
   )
 }

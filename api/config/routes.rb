@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   get "users/index" => "users#index"
   post "users/create" => "users#create"
-  get "users/show" => "users#show"
+  post "users/show" => "users#show"
 
 end

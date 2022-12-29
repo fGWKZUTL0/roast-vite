@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   require 'securerandom'
 
+  def index
+    if user_signed_in?
+      render json: {current_user: current_user, success: true}
+    else
+      render json: {success: false}
+    end
+  end
+
   def new
   end
 
@@ -8,11 +16,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    if user_signed_in?
-      render json: {current_user: current_user, success: true}
+    user = User.find_by(nickname: params[:nickname])
+    
+    if user != nil
+      render json: {user: user, success: true}
     else
       render json: {success: false}
     end
+
   end
 
   def edit

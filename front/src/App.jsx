@@ -17,7 +17,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const AuthContext = createContext()
 
 function App() {
-  
+  const [nickname, setNickname] = useState("")
+  let userNickname = ""
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [token, setToken] = useState({
@@ -32,9 +33,10 @@ function App() {
 
   useEffect(() => {
     if(isSignedIn === false){
-      axios.get('http://localhost:3001/users/show', token)
+      axios.get('http://localhost:3001/users/index', token)
       .then(res => {
         if(res.data.success === true){
+          setNickname(res.data.current_user.nickname)
           setIsSignedIn(true)
         }
         setLoading(false)
@@ -81,7 +83,7 @@ function App() {
         <BrowserRouter>
           <div className="row">
             <div className="col-3">
-              <NavBar />
+              <NavBar nickname={nickname} />
             </div>
             <div className="col-5">
               <Header />
@@ -90,7 +92,7 @@ function App() {
                 <Route path='/Login' element={<RequireNoAuth component={<Login />} />} />
                 <Route path={'/CreateUser'} element={<CreateUser />} />
                 <Route path={'/Logout'} element={<Logout setIsSignedIn={setIsSignedIn} />} />
-                <Route path="/User" element={<RequireAuth component={<User />} />} />
+                <Route path="/User/:nickname" element={<RequireAuth component={<User />} />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>

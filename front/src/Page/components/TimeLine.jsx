@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 const TimeLine = ({ tweets }) => {
 
@@ -11,7 +11,7 @@ const TimeLine = ({ tweets }) => {
           <div key={tweet.id} className="row mb-2">
             <div className="col-12">
               <p className="mb-0">
-                <a className="text-decoration-none" href="">{tweet.nickname}</a>
+                <Link className="text-decoration-none" to={"/User/" + tweet.nickname} >{tweet.nickname}</Link>
                 :{tweet.tweet}
               </p>
             </div>
