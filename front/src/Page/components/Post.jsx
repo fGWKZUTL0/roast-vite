@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from "../../App"
 
+import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -31,9 +32,7 @@ const Post = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Tweet
-      </Button>
+      <Nav.Link className="nav-link btn-link rounded-pill text-center" onClick={handleShow}>Tweet</Nav.Link>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
