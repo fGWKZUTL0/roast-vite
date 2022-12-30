@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 
 import { useDispatch } from 'react-redux'
-import { resetUser } from '../reducer/userSlice'
+import { resetCurrentuser } from '../reducer/currentUserSlice'
 
 import SpinnerTag from './components/SpinnerTag'
 
@@ -21,7 +21,8 @@ const Logout = () => {
       if(res.data.success === true){
         setIsSignedIn(false)
         setToken([])
-        dispatch(resetUser())
+        dispatch(resetCurrentuser())
+        localStorage.clear()
         // ログインページへリダイレクト
         document.location = '/Login'
       }

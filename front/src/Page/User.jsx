@@ -9,12 +9,17 @@ import Col from 'react-bootstrap/Col';
 import EditModal from './userComponents/EditModal'
 import SpinnerTag from './components/SpinnerTag'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { initUser, selectUser } from '../reducer/userSlice'
+
 const User = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector( selectUser )
 
   const {name} = useParams()
 
-  const [thisuser, setThisuser ] = useState([])// thisuserはログイン中のユーザーと異なる
+  //const [user, setUser ] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const { token } = useContext(AuthContext)
@@ -27,7 +32,8 @@ const User = () => {
           if(res.data.success === false){
             navigate("/CreateUser")
           }else{
-            setThisuser(res.data.user)
+            dispatch(initUser(res.data.user))
+            //setUser(res.data.user)
           }
           setIsLoading(false)
         })
@@ -47,11 +53,11 @@ const User = () => {
       : 
         <Container>
           <Row>
-            <Col>{thisuser.nickname}</Col>
-            <Col><EditModal thisuser={setThisuser}/></Col>
+            <Col>{user.nickname}</Col>
+            <Col><EditModal /></Col>
           </Row>
           <Row>
-            <Col>{thisuser.bio}</Col>
+            <Col>{user.bio}</Col>
           </Row>
         </Container>
       }

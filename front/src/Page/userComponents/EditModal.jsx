@@ -8,9 +8,14 @@ import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
 import { useNavigate } from 'react-router-dom'
 
-const EditModal = (props) => {
+import { useSelector, useDispatch } from 'react-redux'
+import { initCurrentuser } from '../../reducer/currentUserSlice'
+import { initUser } from '../../reducer/userSlice'
+
+const EditModal = () => {
   const { token } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  //const navigate = useNavigate()
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -22,8 +27,9 @@ const EditModal = (props) => {
     const formData = new FormData(userEdit)
     axios.put('http://localhost:3001//auth', formData, token)
     .then(res => {
-      if(res.data.success === true){
-        props.setThisuser(res.data.data)
+      if(res.data.status === "success"){
+        dispatch(initUser(res.data.data))
+        dispatch(initCurrentuser(res.data.data))
       }
     })
     setShow(false)

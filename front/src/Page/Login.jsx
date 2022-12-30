@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
 import { useDispatch } from 'react-redux'
-import { initUser } from '../reducer/userSlice'
+import { initCurrentuser } from '../reducer/currentUserSlice'
 
 import SpinnerTag from './components/SpinnerTag'
 
@@ -36,8 +36,9 @@ const Login = () => {
           'token-type': response.headers['token-type'],
         }
       })
-      dispatch(initUser(response.data.data))
+      dispatch(initCurrentuser(response.data.data))
       console.log(response.data.data)
+      localStorage.setItem('currentUserName', response.data.data.name)
       localStorage.setItem('uid', response.headers['uid'])
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers['client'])

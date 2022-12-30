@@ -5,10 +5,11 @@ import { AuthContext }  from "../../App";
 import Post from './Post'
 
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../reducer/userSlice'
+import { selectCurrentuser } from '../../reducer/currentUserSlice'
 
 const NavBar = () => {
-  const user = useSelector( selectUser )
+  const currentUserName = localStorage.getItem('currentUserName')
+  const user = useSelector( selectCurrentuser )
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
 
   return (
@@ -17,7 +18,7 @@ const NavBar = () => {
       <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to="/CreateUser">CreateUser</Nav.Link>
       {isSignedIn ? 
         <>
-          <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to={"/User/" + user.name}>Profile</Nav.Link>
+          <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to={"/User/" + currentUserName}>Profile</Nav.Link>
           <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to="/Logout">Logout</Nav.Link> 
         </>
       :

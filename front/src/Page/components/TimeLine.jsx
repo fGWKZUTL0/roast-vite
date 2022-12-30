@@ -11,7 +11,7 @@ const TimeLine = ({ tweets }) => {
           <div key={tweet.id} className="row mb-2">
             <div className="col-12">
               <p className="mb-0">
-                <Link className="text-decoration-none" to={"/User/" + tweet.nickname} >{tweet.nickname}</Link>
+                <Link className="text-decoration-none" to={"/User/" + tweet.name} >{tweet.nickname}</Link>
                 :{tweet.tweet}
               </p>
             </div>
