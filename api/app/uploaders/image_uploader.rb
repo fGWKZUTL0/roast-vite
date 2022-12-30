@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg png)
   end
 
   # Override the filename of the uploaded files:
@@ -44,4 +44,40 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  #上限変更
+  process :resize_to_limit => [700, 700]
+
+  #JPGで保存
+  process :convert => 'jpg'
+  #画像サイズを変更
+  process resize_to_fill: [100, 100, "center"]
+
+  #サムネイルを生成
+  #version :thumb do
+  #  process :resize_to_fill => [150, 150, "center"]
+  #end
+
+  #version :thumb100 do  #アイコン用
+  #  process resize_to_fill: [100, 100, "center"]
+  #  end 
+
+  #ファイル名を変更し拡張子を同じにする
+  def filename
+    super.chomp(File.extname(super)) + '.jpg' 
+  end
+
+  #日付で保存
+  def filename
+    if original_filename.present?
+      time = Time.now
+      name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+      name.downcase
+    end
+  end
+
+  #デフォルト画像の設定
+  def default_url
+    "default.png" #デフォルト画像に設定したい画像名を記入
+  end
 end

@@ -6,16 +6,17 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
-import { useNavigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { initCurrentuser } from '../../reducer/currentUserSlice'
-import { initUser } from '../../reducer/userSlice'
+import { initUser, selectUser } from '../../reducer/userSlice'
 
 const EditModal = () => {
   const { token } = useContext(AuthContext)
   const dispatch = useDispatch()
-  //const navigate = useNavigate()
+  const user = useSelector( selectUser )
+  
+  const [form, setForm] = useState({bio: user.bio});
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -35,6 +36,15 @@ const EditModal = () => {
     setShow(false)
   }
 
+  const handleChange = (e) => {
+    setForm((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }
+    })
+  }
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>Edit</Button>
@@ -49,7 +59,7 @@ const EditModal = () => {
               className="mb-3"
             >
               <Form.Label>bio</Form.Label>
-              <Form.Control as="textarea" rows={3} name="bio" placeholder="input your bio"/>
+              <Form.Control as="textarea" rows={3} name="bio" value={form.bio} onChange={handleChange}/>
             </Form.Group>
             <Form.Group
               className="mb-3"

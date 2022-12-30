@@ -3,9 +3,10 @@ import axios from 'axios'
 import { useParams, useNavigate } from "react-router-dom"
 import { AuthContext }  from "../App";
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Image from './components/Image'
 import EditModal from './userComponents/EditModal'
 import SpinnerTag from './components/SpinnerTag'
 
@@ -53,8 +54,14 @@ const User = () => {
       : 
         <Container>
           <Row>
-            <Col>{user.nickname}</Col>
-            <Col><EditModal /></Col>
+            <Col>
+              <Col>
+                <Image src={user.image.url} roundedCircle />
+              </Col>
+              <Col><span className="fs-4">{user.nickname}</span></Col>
+              <Col><span className="text-secondary">@{user.name}</span></Col>
+            </Col>
+            <Col className="text-center"><EditModal /></Col>
           </Row>
           <Row>
             <Col>{user.bio}</Col>
