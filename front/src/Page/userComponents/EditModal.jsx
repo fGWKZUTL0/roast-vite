@@ -51,6 +51,12 @@ const EditModal = () => {
               <Form.Label>bio</Form.Label>
               <Form.Control as="textarea" rows={3} name="bio" placeholder="input your bio"/>
             </Form.Group>
+            <Form.Group
+              className="mb-3"
+            >
+              <Form.Label>Icon</Form.Label>
+              <input type="file" name="image" />
+            </Form.Group>
           </Form>
           <Stack direction="horizontal" >
             <Button variant="primary ms-auto" onClick={handleSubmit}>

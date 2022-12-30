@@ -22,6 +22,7 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [token, setToken] = useState({
     headers:{
+      'Content-Type': 'multipart/form-data',
       'uid': localStorage.getItem('uid'),
       'access-token': localStorage.getItem('access-token'),
       'client': localStorage.getItem('client'),
