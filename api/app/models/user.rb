@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  require 'securerandom'
+  before_create -> { self.name = p SecureRandom.hex(5) }
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, :trackable
@@ -31,6 +34,7 @@ class User < ApplicationRecord
   def liked_by?(tweet_id) #この投稿をいいねしているか
     likes.where(tweet_id: tweet_id).exists?
   end
+
   #バリデーション
   #before_save { self.email = email.downcase }
   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

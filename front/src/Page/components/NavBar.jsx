@@ -4,8 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { AuthContext }  from "../../App";
 import Post from './Post'
 
-const NavBar = (props) => {
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../reducer/userSlice'
 
+const NavBar = () => {
+  const user = useSelector( selectUser )
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
 
   return (
@@ -14,7 +17,7 @@ const NavBar = (props) => {
       <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to="/CreateUser">CreateUser</Nav.Link>
       {isSignedIn ? 
         <>
-          <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to={"/User/" + props.nickname}>User</Nav.Link>
+          <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to={"/User/" + user.name}>Profile</Nav.Link>
           <Nav.Link className="nav-link btn-link rounded-pill text-center" as={NavLink} to="/Logout">Logout</Nav.Link> 
         </>
       :

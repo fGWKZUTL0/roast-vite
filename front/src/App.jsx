@@ -17,8 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const AuthContext = createContext()
 
 function App() {
-  const [nickname, setNickname] = useState("")
-  let userNickname = ""
+
   const [loading, setLoading] = useState(true)
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [token, setToken] = useState({
@@ -36,7 +35,6 @@ function App() {
       axios.get('http://localhost:3001/users/index', token)
       .then(res => {
         if(res.data.success === true){
-          setNickname(res.data.current_user.nickname)
           setIsSignedIn(true)
         }
         setLoading(false)
@@ -44,21 +42,14 @@ function App() {
     }
   }, [])
 
-  // 認証確認メソッド
-  // → 認証されていない場合、ログインページにリダイレクト
   const RequireAuth = ( props ) => {
-    // 権限が「GENERAL」の場合、渡されたコンポーネントをレンダリング
     if(isSignedIn === true){
       return props.component
     }
-    // 権限がない場合、ログインページへリダイレクト
     document.location = "/Login"
   }
 
-  // 非認証確認メソッド
   const RequireNoAuth = ( props ) => {
-    // 権限がない場合、渡されたこのポーネントをレンダリング
-    // ※ ログインページとユーザ新規登録ページに適用
     if(isSignedIn === false){
       return props.component
     }
@@ -76,14 +67,14 @@ function App() {
           isSignedIn,
           setIsSignedIn,
           token,
-          setToken
+          setToken,
         }}
       >
       <Provider store={store}>
         <BrowserRouter>
           <div className="row">
             <div className="col-3">
-              <NavBar nickname={nickname} />
+              <NavBar />
             </div>
             <div className="col-5">
               <Header />
@@ -92,7 +83,7 @@ function App() {
                 <Route path='/Login' element={<RequireNoAuth component={<Login />} />} />
                 <Route path={'/CreateUser'} element={<CreateUser />} />
                 <Route path={'/Logout'} element={<Logout setIsSignedIn={setIsSignedIn} />} />
-                <Route path="/User/:nickname" element={<RequireAuth component={<User />} />} />
+                <Route path="/User/:name" element={<RequireAuth component={<User />} />} />
                 <Route path="*" element={<p>There's nothing here: 404!</p>} />
               </Routes>
             </div>

@@ -5,14 +5,19 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext }  from "../App";
 
+import { useDispatch } from 'react-redux'
+import { initUser } from '../reducer/userSlice'
+
 import SpinnerTag from './components/SpinnerTag'
 
 const Login = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate();
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
 
-  const { setIsSignedIn, token, setToken } = useContext(AuthContext);
+  const { setIsSignedIn, token, setToken } = useContext(AuthContext)
 
   const onSubmit = (data) => {
 
@@ -31,6 +36,8 @@ const Login = () => {
           'token-type': response.headers['token-type'],
         }
       })
+      dispatch(initUser(response.data.data))
+      console.log(response.data.data)
       localStorage.setItem('uid', response.headers['uid'])
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers['client'])

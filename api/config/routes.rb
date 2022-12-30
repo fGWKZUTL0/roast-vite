@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get "users/index" => "users#index"
   post "users/create" => "users#create"
   post "users/show" => "users#show"
+  patch "users/update" => "users#update"
 
 end

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(nickname: params[:nickname])
+    user = User.find_by(name: params[:name])
     
     if user != nil
       render json: {user: user, success: true}
@@ -28,6 +28,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
+  end
+
+  def update
+    User.update(current_user.id, nickname: params[:nickname], bio: params[:bio])
+
+    render json: {user: current_user, success: true}
   end
 
   private

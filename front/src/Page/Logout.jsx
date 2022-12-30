@@ -3,10 +3,14 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../App"
 
+import { useDispatch } from 'react-redux'
+import { resetUser } from '../reducer/userSlice'
+
 import SpinnerTag from './components/SpinnerTag'
 
 const Logout = () => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const { setIsSignedIn, token, setToken } = useContext(AuthContext)
 
 	useEffect(() => {
@@ -17,7 +21,7 @@ const Logout = () => {
       if(res.data.success === true){
         setIsSignedIn(false)
         setToken([])
-
+        dispatch(resetUser())
         // ログインページへリダイレクト
         document.location = '/Login'
       }

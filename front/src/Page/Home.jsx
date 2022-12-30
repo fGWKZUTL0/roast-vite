@@ -5,7 +5,7 @@ import { AuthContext }  from "../App"
 import SpinnerTag from './components/SpinnerTag'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { initTweets, addTweets, selectTweets } from '../reducer/tweetsSlice'
+import { initTweets, selectTweets } from '../reducer/tweetsSlice'
 
 const Home = () => {
   const dispatch = useDispatch()
