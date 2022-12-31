@@ -31,13 +31,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    User.update(current_user.id, nickname: params[:nickname], bio: params[:bio])
+    User.update(current_user.id)
 
     render json: {user: current_user, success: true}
   end
 
   private
     def user_params
-      params.require(:user).permit(:nickname, :email, :password, :password_confirmation, :bio, :icon)
+      params.require(:user).permit(:nickname, :email, :password, :password_confirmation, :bio, :image)
     end
 end

@@ -44,5 +44,5 @@ class User < ApplicationRecord
   #validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   #icon uploaderとの関係を記述
-  #mount_uploader :icon, IconUploader
+  mount_uploader :image, ImageUploader
 end
