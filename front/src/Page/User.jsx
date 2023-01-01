@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from './components/Image'
-import EditModal from './userComponents/EditModal'
+import AbstractBtn from './userComponents/AbstractBtn'
 import SpinnerTag from './components/SpinnerTag'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -19,8 +19,6 @@ const User = () => {
   const user = useSelector( selectUser )
 
   const {name} = useParams()
-
-  //const [user, setUser ] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const { token } = useContext(AuthContext)
@@ -34,7 +32,6 @@ const User = () => {
             navigate("/CreateUser")
           }else{
             dispatch(initUser(res.data.user))
-            //setUser(res.data.user)
           }
           setIsLoading(false)
         })
@@ -61,7 +58,9 @@ const User = () => {
               <Col><span className="fs-4">{user.nickname}</span></Col>
               <Col><span className="text-secondary">@{user.name}</span></Col>
             </Col>
-            <Col className="text-center"><EditModal /></Col>
+            <Col className="text-center">
+              <AbstractBtn />
+            </Col>
           </Row>
           <Row>
             <Col>{user.bio}</Col>

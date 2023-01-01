@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { initCurrentuser } from '../../reducer/currentUserSlice'
 import { initUser, selectUser } from '../../reducer/userSlice'
 
-const EditModal = () => {
+const EditModal = (props) => {
   const { token } = useContext(AuthContext)
   const dispatch = useDispatch()
   const user = useSelector( selectUser )
@@ -51,7 +51,7 @@ const EditModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>Edit</Button>
+      <Button variant="info" onClick={handleShow}>Edit</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -65,7 +65,7 @@ const EditModal = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>bio</Form.Label>
-              <Form.Control as="textarea" rows={3} name="bio" value={form.bio} onChange={handleChange}/>
+              <Form.Control as="textarea" rows={3} name="bio" value={form.bio === null ? "" : form.bio} onChange={handleChange}/>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>
