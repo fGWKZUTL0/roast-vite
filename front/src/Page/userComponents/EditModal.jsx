@@ -51,7 +51,7 @@ const EditModal = (props) => {
 
   return (
     <>
-      <Button variant="info" onClick={handleShow}>Edit</Button>
+      <Button variant="secondary" onClick={handleShow}>Edit</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
