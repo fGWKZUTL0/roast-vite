@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import axios from 'axios'
 import { AuthContext } from "../../App"
 
@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectUser } from '../../reducer/userSlice'
 
 const UnfollowBtn = (props) => {
+  const [isHover, setIsHover] = useState(false)
   const { token } = useContext(AuthContext)
   const user = useSelector( selectUser )
 
@@ -22,7 +23,11 @@ const UnfollowBtn = (props) => {
 
   return (
     <>
-      <Button variant="danger" onClick={handleSubmit}>Remove</Button>
+      {isHover?
+        <Button onMouseLeave={()=> setIsHover(false)} variant="danger" onClick={handleSubmit}>Remove</Button>
+      :
+        <Button onMouseEnter={()=> setIsHover(true)} variant="primary">Following</Button>
+      }
     </>
   )
 }

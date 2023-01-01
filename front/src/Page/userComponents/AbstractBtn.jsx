@@ -17,8 +17,6 @@ const AbstractBtn = () => {
   useEffect(() => {
     axios.post('http://localhost:3001/follow/index', { user_id: user.id } , token)
     .then(res => {
-      console.log(user.id)
-      console.log(res.data.relation)
       setIsFollowing(res.data.relation)
     })
   }, [])

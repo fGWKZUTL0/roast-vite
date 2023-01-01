@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
 
   def index
     followed_id_lists = Follow.where(follower_id: current_user.id).pluck(:followed_id)
+    followed_id_lists.push(current_user.id)
 
     tweets = Tweet.find_by_sql("SELECT t.tid, t.user_id, t.tweet, t.t_created_at AS created_at, u.nickname, u.name
       FROM tweets AS t
@@ -14,7 +15,7 @@ class TweetsController < ApplicationController
   def create
     tweet = Tweet.new(tweet: params[:tweet], user_id: current_user.id)
     if tweet.save
-      return_tweet = Tweet.find_by_sql("SELECT t.id, t.user_id, t.tweet, t.created_at, u.nickname, u.name
+      return_tweet = Tweet.find_by_sql("SELECT t.tid, t.user_id, t.tweet, t.t_created_at, u.nickname, u.name
         FROM tweets AS t
         RIGHT JOIN users AS u ON t.user_id = u.id
         WHERE t.id = #{tweet.id}")

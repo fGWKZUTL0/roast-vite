@@ -10,6 +10,7 @@ import SpinnerTag from './components/SpinnerTag'
 
 const Logout = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { setIsSignedIn, token, setToken } = useContext(AuthContext)
 
@@ -24,7 +25,7 @@ const Logout = () => {
         dispatch(resetCurrentuser())
         localStorage.clear()
         // ログインページへリダイレクト
-        document.location = '/Login'
+        navigate('/Login')
       }
       console.log(res.data.success)
     })
