@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   post "follow/create" => "follows#create"
   post "follow/destroy" => "follows#destroy"
   post "follow/following" => "follows#following"
+  post "follow/follower" => "follows#follower"
 
 end

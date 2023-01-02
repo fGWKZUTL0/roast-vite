@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import Image from './components/Image'
 import AbstractBtn from './userComponents/AbstractBtn'
 import Following from './userComponents/Following'
-import Follower from './userComponents/Follower'
+import Followed from './userComponents/Followed'
 import SpinnerTag from './components/SpinnerTag'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -62,7 +62,7 @@ const User = () => {
                 <Image src={user.image.url} roundedCircle />
               </Col>
               <Col><span className="fs-4">{user.nickname}</span> <span className="text-muted">@{user.name}</span></Col>
-              <Col> <Following count={following}/> </Col>
+              <Col> <Following count={following}/> <Followed count={following}/></Col>
             </Col>
             <Col className="text-center">
               <AbstractBtn />

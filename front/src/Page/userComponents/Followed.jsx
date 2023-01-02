@@ -10,10 +10,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {  selectUser } from '../../reducer/userSlice'
 
-const Following = (props) => {
+const Followed = (props) => {
   const { token } = useContext(AuthContext)
   const user = useSelector( selectUser )
-  const [followings, setFollowings] = useState([])
+  const [followed, setFollowed] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [show, setShow] = useState(false)
 
@@ -22,10 +22,10 @@ const Following = (props) => {
     setShow(false)
   }
   const handleShow = () => {
-    axios.post('http://localhost:3001/follow/following', {user_id: user.id}, token)
+    axios.post('http://localhost:3001/follow/follower', {user_id: user.id}, token)
     .then(res => {
       if(res.data.status === "success"){
-        setFollowings(res.data.users)
+        setFollowed(res.data.users)
         setIsLoading(false)
       }
     })
@@ -34,19 +34,19 @@ const Following = (props) => {
 
   return (
     <>
-      <span className="text-decoration-underline" onClick={handleShow}>{props.count}follow</span>
+      <span className="text-decoration-underline" onClick={handleShow}>{props.count}follower</span>
 
       <Modal scrollable={true} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Following Users</Modal.Title>
+          <Modal.Title>Followed Users</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         {      
         isLoading ?
           <SpinnerTag />
         :
-          followings.length > 0 ?
-            followings.map((follow) => (
+          followed.length > 0 ?
+            followed.map((follow) => (
               <div key={follow.id} className="row mb-2">
                 <div className="col-12">
                   <p className="mb-0">
@@ -56,7 +56,7 @@ const Following = (props) => {
               </div>
             ))
           :
-            <>There are no following users</>
+            <>There are no followed users</>
         }
         </Modal.Body>
       </Modal>
@@ -64,4 +64,4 @@ const Following = (props) => {
   )
 }
 
-export default Following
+export default Followed
