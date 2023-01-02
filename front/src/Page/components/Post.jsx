@@ -44,7 +44,7 @@ const Post = () => {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Control as="textarea" rows={3} name="tweet" placeholder="What's up?"/>
+              <Form.Control as="textarea" rows={3} name="tweet" placeholder="What's up?" autoFocus/>
             </Form.Group>
           </Form>
           <Stack direction="horizontal" >

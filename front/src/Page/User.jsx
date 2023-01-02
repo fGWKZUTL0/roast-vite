@@ -8,6 +8,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from './components/Image'
 import AbstractBtn from './userComponents/AbstractBtn'
+import Following from './userComponents/Following'
+import Follower from './userComponents/Follower'
 import SpinnerTag from './components/SpinnerTag'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -16,9 +18,11 @@ import { initUser, selectUser } from '../reducer/userSlice'
 const User = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [following, setFollowing] = useState(0)
+  const [followed, setFollowed] = useState(0)
   const user = useSelector( selectUser )
-
   const {name} = useParams()
+
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const { token } = useContext(AuthContext)
@@ -31,6 +35,8 @@ const User = () => {
           if(res.data.success === false){
             navigate("/CreateUser")
           }else{
+            setFollowing(res.data.following)
+            setFollowed(res.data.followed)
             dispatch(initUser(res.data.user))
           }
           setIsLoading(false)
@@ -40,7 +46,7 @@ const User = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [name])
 
   return (
     <>
@@ -55,8 +61,8 @@ const User = () => {
               <Col>
                 <Image src={user.image.url} roundedCircle />
               </Col>
-              <Col><span className="fs-4">{user.nickname}</span></Col>
-              <Col><span className="text-secondary">@{user.name}</span></Col>
+              <Col><span className="fs-4">{user.nickname}</span> <span className="text-muted">@{user.name}</span></Col>
+              <Col> <Following count={following}/> </Col>
             </Col>
             <Col className="text-center">
               <AbstractBtn />

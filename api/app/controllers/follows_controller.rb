@@ -30,9 +30,14 @@ class FollowsController < ApplicationController
     end
   end
 
-  def followings
+  def following
+    followings_id = Follow.where(follower_id: params[:user_id]).select(:followed_id)
+    followings_user = User.where(id: followings_id)
+    
+    render json: {status: "success", users: followings_user}
   end
 
-  def followers
+  def follower
+    followers_count = Follow.where(followed_id: user.id).count
   end
 end

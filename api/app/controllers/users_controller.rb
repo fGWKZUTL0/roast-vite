@@ -17,9 +17,11 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by(name: params[:name])
-    
+    following = Follow.where(follower_id: user.id).count
+    followed = Follow.where(followed_id: user.id).count
+
     if user != nil
-      render json: {user: user, success: true}
+      render json: {user: user, following: following, followed: followed, success: true}
     else
       render json: {success: false}
     end

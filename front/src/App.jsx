@@ -63,8 +63,6 @@ function App() {
       :
       <AuthContext.Provider
         value={{
-          loading,
-          setLoading,
           isSignedIn,
           setIsSignedIn,
           token,
