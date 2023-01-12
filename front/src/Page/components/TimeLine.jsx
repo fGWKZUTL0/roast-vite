@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from './Image'
 
+import nl2br from '../../api/nl2br';
 import css from "../../index.css"
 
 const TimeLine = ({ tweets }) => {
@@ -31,7 +32,7 @@ const TimeLine = ({ tweets }) => {
                 </div> 
               </Row>
               <Row className="p-2">
-                {tweet.tweet}
+                {nl2br(tweet.tweet)}
               </Row>
               <Row>
                 <span className="text-muted">{tweet.created_at}</span>
