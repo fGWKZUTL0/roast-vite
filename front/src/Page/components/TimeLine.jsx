@@ -6,7 +6,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from './Image'
 
-import nl2br from '../../api/nl2br';
+import nl2br from '../../api/nl2br'
+import dateFormat from '../../api/dateFormat'
 import css from "../../index.css"
 
 const TimeLine = ({ tweets }) => {
@@ -24,18 +25,18 @@ const TimeLine = ({ tweets }) => {
             </Col>
             <Col sm={10}>
               <Row>
-                <div>
-                  <Link className="text-decoration-none" to={"/User/" + tweet.name} >
-                    {tweet.nickname}
-                    <span className="text-muted">@{tweet.name}</span>
-                  </Link>
-                </div> 
-              </Row>
-              <Row className="p-2">
-                {nl2br(tweet.tweet)}
+                <Link className="text-decoration-none" to={"/User/" + tweet.name} >
+                  {tweet.nickname}
+                  <span className="text-muted">@{tweet.name}</span>
+                </Link>
               </Row>
               <Row>
-                <span className="text-muted">{tweet.created_at}</span>
+                <div className="py-2">
+                  {nl2br(tweet.tweet)}
+                </div>
+              </Row>
+              <Row>
+                <span className="text-muted">{dateFormat(tweet.created_at)}</span>
               </Row>
             </Col>
           </Row>
