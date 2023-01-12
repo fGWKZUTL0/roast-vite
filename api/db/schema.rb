@@ -21,8 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_01_092150) do
   create_table "tweets", primary_key: "tid", charset: "utf8mb3", force: :cascade do |t|
     t.text "tweet"
     t.integer "user_id"
-    t.datetime "t_created_at", null: false
-    t.datetime "t_updated_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|

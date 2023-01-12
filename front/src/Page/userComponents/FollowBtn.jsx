@@ -16,6 +16,7 @@ const FollowBtn = (props) => {
     .then(res => {
       if(res.data.status === "success"){
         props.setIsFollowing("following")
+        props.updateFollowed(1)
       }
     })
   }

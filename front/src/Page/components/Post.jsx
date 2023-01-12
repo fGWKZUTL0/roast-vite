@@ -23,8 +23,9 @@ const Post = () => {
   const handleSubmit = () => {
     const postTweet = document.getElementById("postTweet")
     const formData = new FormData(postTweet)
-    axios.post('http://localhost:3001//tweets/create', formData, token)
+    axios.post('http://localhost:3001/tweets/create', formData, token)
     .then(res => {
+      console.log(res.data.tweet)
       dispatch(addTweets(res.data.tweet))
     })
     setShow(false)

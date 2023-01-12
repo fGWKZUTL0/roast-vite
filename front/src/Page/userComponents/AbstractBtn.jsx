@@ -9,7 +9,7 @@ import FollowBtn from './FollowBtn'
 import UnfollowBtn from './UnfollowBtn'
 import EditModal from './EditModal'
 
-const AbstractBtn = () => {
+const AbstractBtn = (props) => {
   const { token } = useContext(AuthContext)
   const user = useSelector( selectUser )
   const [isFollowing, setIsFollowing] = useState("")
@@ -27,9 +27,9 @@ const AbstractBtn = () => {
         if (isFollowing === "same") {
           return <EditModal />
         } else if(isFollowing === "following") {
-          return <UnfollowBtn setIsFollowing={setIsFollowing} />
+          return <UnfollowBtn updateFollowed={props.updateFollowed} setIsFollowing={setIsFollowing} />
         } else if(isFollowing === "notFollowing"){
-          return <FollowBtn setIsFollowing={setIsFollowing} />
+          return <FollowBtn updateFollowed={props.updateFollowed} setIsFollowing={setIsFollowing} />
         }
       })()}
     </>

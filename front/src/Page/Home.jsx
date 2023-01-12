@@ -20,13 +20,15 @@ const Home = () => {
       try {
         axios.get('http://localhost:3001/tweets/index', token)
         .then(res => {
+          console.log(res.data.tweets)
           dispatch(initTweets(res.data.tweets))
+
           setIsLoading(false)
         })
       } catch (error) {
         setIsError(true)
       }
-      console.log(tweets)
+      //console.log(tweets)
     }
     fetchData()
   }, [])

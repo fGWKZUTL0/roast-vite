@@ -11,7 +11,7 @@ export const tweetsSlice = createSlice({
             state.value = action.payload
         },
         addTweets(state, action) {
-            state.value.unshift(action.payload[0])
+            state.value.push(action.payload[0])
         },
         deleteTweets(state, action) {
             state.value = state.value.filter(tweet => tweet.id !== action.payload.id)

@@ -11,6 +11,7 @@ import Login from './Page/Login.jsx'
 import Logout from './Page/Logout.jsx'
 import Header from './Page/Header.jsx'
 import NavBar from './Page/components/NavBar.jsx'
+import SpinnerTag from './Page/components/SpinnerTag'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -59,7 +60,7 @@ function App() {
   return(
     <div className="App contents">
       { loading ?
-        <></>
+        <>now loading...</>
       :
       <AuthContext.Provider
         value={{

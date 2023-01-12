@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import axios from 'axios'
 
-import Spinner from 'react-bootstrap/Spinner'
+import SpinnerTag from './components/SpinnerTag'
 
 const CreateUser = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -33,9 +33,7 @@ const CreateUser = () => {
   return (
     <>
       {isLoading ? 
-        <Spinner animation="border" role="status" variant="primary">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner> 
+        <SpinnerTag />
         : 
         <Form id="CreateUser" name="CreateUser" >
           <Form.Group className="mb-3">

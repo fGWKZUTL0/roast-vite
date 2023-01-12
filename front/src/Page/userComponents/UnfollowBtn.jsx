@@ -17,6 +17,7 @@ const UnfollowBtn = (props) => {
     .then(res => {
       if(res.data.status === "success"){
         props.setIsFollowing("notFollowing")
+        props.updateFollowed(-1)
       }
     })
   }

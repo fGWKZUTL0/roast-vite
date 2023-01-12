@@ -38,6 +38,7 @@ const User = () => {
             setFollowing(res.data.following)
             setFollowed(res.data.followed)
             dispatch(initUser(res.data.user))
+            console.log(user)
           }
           setIsLoading(false)
         })
@@ -47,6 +48,10 @@ const User = () => {
     }
     fetchData()
   }, [name])
+
+  const updateFollowed = (num) =>{
+    setFollowed(followed + num)
+  }
 
   return (
     <>
@@ -59,13 +64,13 @@ const User = () => {
           <Row>
             <Col>
               <Col>
-                <Image src={user.image.url} roundedCircle />
+                <Image src={user.image.url} width={100} height={100} roundedCircle />
               </Col>
               <Col><span className="fs-4">{user.nickname}</span> <span className="text-muted">@{user.name}</span></Col>
-              <Col> <Following count={following}/> <Followed count={following}/></Col>
+              <Col> <Following count={following}/> <Followed count={followed}/></Col>
             </Col>
             <Col className="text-center">
-              <AbstractBtn />
+              <AbstractBtn updateFollowed={updateFollowed}/>
             </Col>
           </Row>
           <Row>

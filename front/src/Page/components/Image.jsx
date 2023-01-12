@@ -7,7 +7,11 @@ function Image(props) {
   } = props
 
   return (
-    <BootstrapImage src={src} {...otherProps} />
+    <BootstrapImage 
+      width={props.width}
+      height={props.height}
+      src={ src}
+      {...otherProps} />
   )
 }
 
