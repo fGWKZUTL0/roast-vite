@@ -8,14 +8,16 @@ import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
 import { IconContext } from "react-icons"
 import { BsFillCameraFill } from "react-icons/bs"
+import Image from "../components/Image"
 
 import { useSelector, useDispatch } from 'react-redux'
-import { initCurrentuser } from '../../reducer/currentUserSlice'
+import { initCurrentuser, selectCurrentuser } from '../../reducer/currentUserSlice'
 import { initUser, selectUser } from '../../reducer/userSlice'
 
 const EditModal = (props) => {
   const { token } = useContext(AuthContext)
   const dispatch = useDispatch()
+  const currentUser = useSelector( selectCurrentuser )
   const user = useSelector( selectUser )
   
   const [form, setForm] = useState({nickname: user.nickname, bio: user.bio});
@@ -60,25 +62,29 @@ const EditModal = (props) => {
         <Modal.Body>
           <Form id="userEdit">
             <Form.Group className="mb-3">
+              <Form.Label>
+                <div>
+                  <Image src={currentUser.image.url} width={100} height={100} roundedCircle />
+                  {
+                    /*                         
+                    <IconContext.Provider value={{ color: '#ccc', size: '50px' }}>
+                      <BsFillCameraFill onClick={() => inputFileRef.current?.click()}/>
+                    </IconContext.Provider>
+                    */
+                  }
+                </div>
+                <div>
+                  <input ref={inputFileRef} style={{ display: 'none' }} type="file" name="image" />
+                </div>
+              </Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>nickname</Form.Label>
               <Form.Control type="text" rows={3} name="nickname" value={form.nickname} onChange={handleChange}/>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>bio</Form.Label>
               <Form.Control as="textarea" rows={3} name="bio" value={form.bio === null ? "" : form.bio} onChange={handleChange}/>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <div>
-                  <IconContext.Provider value={{ color: '#ccc', size: '50px' }}>
-                    <BsFillCameraFill onClick={() => inputFileRef.current?.click()}/>
-                  </IconContext.Provider>
-                </div>
-                <div>
-                  <input ref={inputFileRef} style={{ display: 'none' }} type="file" name="image" />
-                </div>
-              </Form.Label>
-              <Form.Label className="p-2 fs-5">Select icon</Form.Label>
             </Form.Group>
           </Form>
           <Stack direction="horizontal" >
